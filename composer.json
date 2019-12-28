@@ -3,7 +3,10 @@
     "description": "laravel persian validation package",
     "license": "MIT",
     "authors": [
-        { "name": "farhad zand", "email": "farhad.pd@gmail.com" }
+        {
+            "name": "farhad zand",
+            "email": "farhad.pd@gmail.com"
+        }
     ],
     "require": {
         "php": "^7.1",
