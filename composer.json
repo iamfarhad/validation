@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Iamfarhad\\Validation\\PersianValidationServiceProvider"
+                "Iamfarhad\\Validation\\ValidationServiceProvider"
             ]
         }
     }
