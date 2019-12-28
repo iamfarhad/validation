@@ -24,7 +24,6 @@ class ValidationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('ValidationMessages', 'Iamfarhad\Validation\ValidationMessages');
-
     }
 
     /**
