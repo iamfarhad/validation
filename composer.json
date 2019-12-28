@@ -1,0 +1,26 @@
+{
+    "name": "iamfarhad/validation",
+    "description": "laravel persian validation package",
+    "license": "MIT",
+    "authors": [
+        { "name": "farhad zand", "email": "farhad.pd@gmail.com" }
+    ],
+    "require": {
+        "illuminate/support": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iamfarhad\\Validation\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Iamfarhad\\Validation\\PersianValidationServiceProvider"
+            ]
+        }
+    }
+}
