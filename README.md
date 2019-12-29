@@ -49,6 +49,7 @@ You can access to validation rules by passing the rules key according blew follo
 | melli_code | Iran melli code |
 | is_not_persian | Doesn't accept Persian alphabet and numbers |
 | iran_phone | Iran phone numbers |
+| iran_phone_area | Iran phone numbers with area code |
 | card_number | Payment card numbers |
 | iran_address | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters|
 | iran_postal_code | Iran postal code |
