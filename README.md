@@ -2,7 +2,8 @@
 [![Build Status](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/build.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/?branch=master)
-
+[![Latest Stable Version](https://poser.pugx.org/iamfarhad/validation/v/stable)](https://packagist.org/packages/iamfarhad/validation)
+[![License](https://poser.pugx.org/iamfarhad/validation/license)](https://packagist.org/packages/iamfarhad/validation)
 
 # Laravel Persian Validation
 
