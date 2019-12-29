@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    backupStaticAttributes="false"
-
-    cacheTokens="false"
-    colors="true"
-    convertErrorsToExceptions="true"
+    backupGlobals="false" backupStaticAttributes="false"
+    colors="true" convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
-    forceCoversAnnotation="false"
-    mapTestClassNameToCoveredClassName="false"
-    printerClass="PHPUnit_TextUI_ResultPrinter"
-    bootstrap="vendor/autoload.php"
-    processIsolation="false"
-    stopOnError="false"
-    stopOnFailure="false"
-    stopOnIncomplete="false"
-    stopOnSkipped="false"
-    testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
-
-    strict="false"
-    verbose="false"
+    processIsolation="false" stopOnFailure="false"
 >
-
+    <php>
+        <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+    </php>
     <testsuites>
-        <testsuite name="AllTests">
-            <directory>tests</directory>
+        <testsuite name="Library Program Test Suite">
+            <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
-
 </phpunit>
