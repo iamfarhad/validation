@@ -1,4 +1,8 @@
 [![Build Status](https://travis-ci.com/iamfarhad/validation.svg?branch=master)](https://travis-ci.com/iamfarhad/validation)
+[![Build Status](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/build.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/build-status/master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/?branch=master)
+
 
 # Laravel Persian Validation
 
@@ -37,165 +41,111 @@ You can access to validation rules by passing the rules key according blew follo
 
 | Rules | Descriptions |
 | --- | --- |
-| persian_alpha | Persian alphabet |
-| persian_num | Persian numbers |
-| persian_alpha_num | Persian alphabet and numbers |
+| persian_alphabet | Persian alphabet |
+| persian_number | Persian numbers |
+| persian_alphabet_number | Persian alphabet and numbers |
 | iran_mobile | Iran mobile numbers |
-| sheba | Iran Sheba numbers |
+| sheba_number | Iran Sheba numbers |
 | melli_code | Iran melli code |
 | is_not_persian | Doesn't accept Persian alphabet and numbers |
-| limited_array | Check variable is array and array must be lesser and equal than parameter |
-| unsigned_num | Check variable is unsigned numbers |
-| alpha_space | Accept Persian, English and ... alphabet, space character|
-| a_url | Check correct URL |
-| a_domain | Check correct Domain |
-| more | Check value be max and not equal too|
-| less | Check value be min and not equal too |
 | iran_phone | Iran phone numbers |
 | card_number | Payment card numbers |
-| address | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters|
+| iran_address | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters|
 | iran_postal_code | Iran postal code |
-| package_name | Check APK package name |
 
-
-### Persian Alpha
+### Persian Alphabet
 Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
 
 ```
-$input = [ 'فارسی' ];
+$request = [ 'فارسی' ];
 
-$rules = [ 'persian_alpha' ];
+$rules = [ 'persian_alphabet' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
 ### Persian numbers
 Validate Persian standard numbers (۰۱۲۳۴۵۶۷۸۹):
 
 ```
-$input = [ '۰۱۲۳۴۵۶۷۸۹' ];
+$request = [ '۰۱۲۳۴۵۶۷۸۹' ];
 
-$rules = [ 'persian_num' ];
+$rules = [ 'persian_number' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
-### Persian Alpha Num
+### Persian Alphabet Number
 Validate Persian alpha num:
 
 ```
-$input = [ 'فارسی۱۲۳۴۵۶۷۸۹' ];
+$request = [ 'فارسی۱۲۳۴۵۶۷۸۹' ];
 
-$rules = [ 'persian_alpha_num' ];
+$rules = [ 'persian_alphabet_number' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
 ### Iran mobile phone
 Validate Iran mobile phones (irancel, rightel, hamrah-e-aval, ...):
 
 ```
-$input = [ '09381234567' ];
+$request = [ '09381234567' ];
 
 $rules = [ 'iran_mobile' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
 ### Sheba number
 Validate Iran bank sheba numbers:
 
 ```
-$input = [ 'IR062960000000100324200001' ];
+$request = [ 'IR062960000000100324200001' ];
 
-$rules = [ 'sheba' ];
+$rules = [ 'sheba_number' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
 ### Iran national code
 Validate Iran national code (melli-code):
 
 ```
-$input = [ '3240175800' ];
+$request = [ '3240175800' ];
 
 $rules = [ 'melli_code' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
 ### Payment card number
 Validate Iran payment card numbers:
 
 ```
-$input = [ '6274129005473742' ];
+$request = [ '6274129005473742' ];
 
 $rules = [ 'card_number' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 ```
 
 ### Iran postal code
 Validate Iran postal code:
 
 ```
-$input = [ '167197-35744' ];
+$request = [ '167197-35744' ];
 
 $rules = [ 'iran_postal_code' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 
 
-$input = [ '16719735744' ];
+$request = [ '16719735744' ];
 
 $rules = [ 'iran_postal_code' ];
 
-Validator::make( $input, $rules );
+Validator::make( $request, $rules );
 
 ```
-
-## More
-Here is full list of Anetwork validation rules usage:
-
-``` php
-Validator::make( $request->all(), [
-
-  'name'          => 'persian_alpha|unique|max:25', // Validate Persian alphabet, unique and max to 25 characters
-
-  'age'           => 'persian_num|required',  // Validate Persian numbers and check it's required
-
-  'city'          => 'persian_alpha_num|min:10',  // Validate persian alphabet & numbers at least 10 digit accepted
-
-  'mobile'        => 'iran_mobile', // Validate mobile number
-
-  'sheba_number'  => 'sheba', // Validate sheba number of bank account
-
-  'melli_code'    => 'melli_code',  // Validate melli code number
-
-  'latin_name'    => 'is_not_persian',  // Validate alphabet and doesn't contain Persian alphabet or number
-
-  'your_array'    => 'limited_array:2', // Validate your array variable and must be contian 2 member or lesser
-
-  'url'           => 'a_url', // Validate url
-
-  'domain'        => 'a_domain',  // Validate domain
-
-  'more'          => 'more:10', // Validate value be more than parameter
-
-  'less'          => 'less:10', // Validate value be less than parameter
-
-  'phone'         => 'iran_phone', // Validate phone number
-
-  'card_number'   => 'card_number', // Validate payment card number
-
-  'address'       => 'address' // validate Persian, English and ... alphabet, Persian and English numbers and some special characters
-
-  'postal_code'   => 'iran_postal_code' // validate iran postal code format
-
-  'package_name'  => 'package_name' // validate APK package name
-
-
-]);
-```
-
 
