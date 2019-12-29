@@ -11,6 +11,8 @@
 
 namespace Iamfarhad\Validation;
 
+use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
+use Iamfarhad\Validation\Rules\PersianAlphabetNumber;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +25,8 @@ class ValidationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('ValidationMessages', 'Iamfarhad\Validation\ValidationMessages');
+        $this->app->bind('ValidationMessages', 'Iamfarhad\Validation\ValidationMessages');
+        $this->app->bind(ValidationRuleInterface::class, PersianAlphabetNumber::class);
     }
 
     /**
