@@ -26,7 +26,6 @@ class ValidationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('ValidationMessages', 'Iamfarhad\Validation\ValidationMessages');
-        $this->app->bind(ValidationRuleInterface::class, PersianAlphabetNumber::class);
     }
 
     /**
@@ -52,6 +51,9 @@ class ValidationServiceProvider extends ServiceProvider
             $Rule = 'Iamfarhad\Validation\Rules';
             if (class_exists($Rule . '\\' . $class)) {
                 $reflectionClass = new \ReflectionClass($Rule . '\\' . $class);
+                if(!$reflectionClass->implementsInterface(ValidationRuleInterface::class)) {
+                    throw new \Exception('this extenstion is not instance of ValidationRuleInterface');
+                }
                 $module = $reflectionClass->newInstanceArgs([]);
                 $module->register();
             }
