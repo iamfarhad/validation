@@ -22,18 +22,21 @@ class MelliCode extends AbstractValidationRule implements ValidationRuleInterfac
         } elseif (strlen($value) == 9) {
             $value = '0' . $value;
         }
+
         for ($i = 0; $i <= 8; $i++) {
             $sub = $sub + ($value[$i] * (10 - $i));
         }
+
         if (($sub % 11) < 2) {
             $control = ($sub % 11);
         } else {
             $control = 11 - ($sub % 11);
         }
+
         if ($value[9] == $control) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 }
