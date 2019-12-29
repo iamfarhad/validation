@@ -98,6 +98,37 @@ class ValidationTest extends TestCase
         $this->assertEquals(false, $iranAddressExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
+    public function testIranPostalCode()
+    {
+        $iranPostalCodeExtension = new \Iamfarhad\Validation\Rules\IranPostalCode();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $iranPostalCodeExtension);
+
+        // success test
+        $this->value = '6385141552';
+        $this->assertEquals(true, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '63851-41552';
+        $this->assertEquals(true, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '638514155';
+        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '63851415522';
+        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '63851-4155';
+        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '6385-41552';
+        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
     public function testIranMobile()
     {
         $IranMobileExtension = new \Iamfarhad\Validation\Rules\IranMobile();
@@ -135,5 +166,123 @@ class ValidationTest extends TestCase
         // fail test
         $this->value = '00980912072401';
         $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
+    public function testIranPhone()
+    {
+        $iranPhoneExtension = new \Iamfarhad\Validation\Rules\IranPhone();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $iranPhoneExtension);
+
+        // success test
+        $this->value = '44614785';
+        $this->assertEquals(true, $iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '4461478';
+        $this->assertEquals(false, $iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '446147877';
+        $this->assertEquals(false, $iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
+    public function testIranPhoneWithArea()
+    {
+        $iranPhoneWithArea = new \Iamfarhad\Validation\Rules\IranPhoneWithArea();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $iranPhoneWithArea);
+
+        // success test
+        $this->value = '02144614785';
+        $this->assertEquals(true, $iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '2144614785';
+        $this->assertEquals(false, $iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '0214461478';
+        $this->assertEquals(false, $iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
+    public function testIsNotPersian()
+    {
+        $isNotPersian = new \Iamfarhad\Validation\Rules\IsNotPersian();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $isNotPersian);
+
+        // success test
+        $this->value = 'hello world!';
+        $this->assertEquals(true, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '0214461478';
+        $this->assertEquals(true, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = 'سلام دنیا';
+        $this->assertEquals(false, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '۴۵۶۷';
+        $this->assertEquals(false, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
+    public function testMelliCode()
+    {
+        $melliCodeExtension = new \Iamfarhad\Validation\Rules\MelliCode();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $melliCodeExtension);
+
+        // success test
+        $this->value = '0112169228';
+        $this->assertEquals(true, $melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '0112169227';
+        $this->assertEquals(false, $melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
+    public function testShebaNumber()
+    {
+        $shebaNumberExtension = new \Iamfarhad\Validation\Rules\ShebaNumber();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $shebaNumberExtension);
+
+        // success test
+        $this->value = 'IR930150000001351800087201';
+        $this->assertEquals(true, $shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '930150000001351800087201';
+        $this->assertEquals(false, $shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = 'IR930150000001351800087202';
+        $this->assertEquals(false, $shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+    }
+
+    public function testCardNumber()
+    {
+        $cardNumberExtension = new \Iamfarhad\Validation\Rules\CardNumber();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $cardNumberExtension);
+
+        // success test
+        $this->value = '0590995099116037';
+        $this->assertEquals(true, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '0590995099116038';
+        $this->assertEquals(false, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '059099509911603';
+        $this->assertEquals(false, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '05909950991160355';
+        $this->assertEquals(false, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 }
