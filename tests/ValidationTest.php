@@ -22,23 +22,23 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '۴۵۶۷';
-        $this->assertEquals(true, $persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = 12233;
-        $this->assertEquals(false, $persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '۴۵۶۷90';
-        $this->assertEquals(false, $persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '-۴۵۶۷90';
-        $this->assertEquals(false, $persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '+۴۵۶۷90';
-        $this->assertEquals(false, $persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testPersianAlphabet()
@@ -49,20 +49,20 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = 'سلام دنیا';
-        $this->assertEquals(true, $persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = 'hello world!';
-        $this->assertEquals(false, $persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = 'سلام دنیا.';
-        $this->assertEquals(false, $persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
 
         // fail test
         $this->value = 'سلام دنیا hello world';
-        $this->assertEquals(false, $persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testPersianAlphabetNumber()
@@ -73,11 +73,11 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = 'سلام دنیا ۴۵۶۷';
-        $this->assertEquals(true, $persianAlphabetNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($persianAlphabetNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = 'سلام دنیا 125874';
-        $this->assertEquals(false, $persianAlphabetNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($persianAlphabetNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testIranAddress()
@@ -88,14 +88,14 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده - پلاک 46';
-        $this->assertEquals(true, $iranAddressExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($iranAddressExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         /*
          * fail test
          * fail with &
          */
         $this->value = 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده - پلاک 46 & ساختمان ایران رنتر';
-        $this->assertEquals(false, $iranAddressExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranAddressExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testIranPostalCode()
@@ -106,27 +106,27 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '6385141552';
-        $this->assertEquals(true, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // success test
         $this->value = '63851-41552';
-        $this->assertEquals(true, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '638514155';
-        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '63851415522';
-        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '63851-4155';
-        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '6385-41552';
-        $this->assertEquals(false, $iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPostalCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testIranMobile()
@@ -137,35 +137,35 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '09120724013';
-        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // success test
         $this->value = '989120724013';
-        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // success test
         $this->value = '+989120724013';
-        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // success test
         $this->value = '00989120724013';
-        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // success test
         $this->value = '9120724013';
-        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '0912072401';
-        $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '+980912072401';
-        $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '00980912072401';
-        $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testIranPhone()
@@ -176,15 +176,15 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '44614785';
-        $this->assertEquals(true, $iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '4461478';
-        $this->assertEquals(false, $iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '446147877';
-        $this->assertEquals(false, $iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPhoneExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testIranPhoneWithArea()
@@ -195,15 +195,15 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '02144614785';
-        $this->assertEquals(true, $iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '2144614785';
-        $this->assertEquals(false, $iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '0214461478';
-        $this->assertEquals(false, $iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($iranPhoneWithArea->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testIsNotPersian()
@@ -214,19 +214,19 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = 'hello world!';
-        $this->assertEquals(true, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // success test
         $this->value = '0214461478';
-        $this->assertEquals(true, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = 'سلام دنیا';
-        $this->assertEquals(false, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '۴۵۶۷';
-        $this->assertEquals(false, $isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testMelliCode()
@@ -237,11 +237,11 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '0112169228';
-        $this->assertEquals(true, $melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '0112169227';
-        $this->assertEquals(false, $melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testShebaNumber()
@@ -252,15 +252,15 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = 'IR930150000001351800087201';
-        $this->assertEquals(true, $shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '930150000001351800087201';
-        $this->assertEquals(false, $shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = 'IR930150000001351800087202';
-        $this->assertEquals(false, $shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testCardNumber()
@@ -271,18 +271,18 @@ class ValidationTest extends TestCase
 
         // success test
         $this->value = '0590995099116037';
-        $this->assertEquals(true, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertTrue($cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '0590995099116038';
-        $this->assertEquals(false, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '059099509911603';
-        $this->assertEquals(false, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
         // fail test
         $this->value = '05909950991160355';
-        $this->assertEquals(false, $cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+        $this->assertFalse($cardNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 }
