@@ -101,5 +101,39 @@ class ValidationTest extends TestCase
     public function testIranMobile()
     {
         $IranMobileExtension = new \Iamfarhad\Validation\Rules\IranMobile();
+
+        $this->assertInstanceOf(ValidationRuleInterface::class, $IranMobileExtension);
+
+        // success test
+        $this->value = '09120724013';
+        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '989120724013';
+        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '+989120724013';
+        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '00989120724013';
+        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '9120724013';
+        $this->assertEquals(true, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '0912072401';
+        $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '+980912072401';
+        $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '00980912072401';
+        $this->assertEquals(false, $IranMobileExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 }
