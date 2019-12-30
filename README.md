@@ -4,6 +4,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/iamfarhad/validation/v/stable)](https://packagist.org/packages/iamfarhad/validation)
 [![License](https://poser.pugx.org/iamfarhad/validation/license)](https://packagist.org/packages/iamfarhad/validation)
+[![Total Downloads](https://poser.pugx.org/iamfarhad/validation/downloads)](https://packagist.org/packages/iamfarhad/validation)
 
 # Laravel Persian Validation
 
@@ -58,7 +59,7 @@ You can access to validation rules by passing the rules key according blew follo
 ### Persian Alphabet
 Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
 
-```
+``` php
 $request = [ 'فارسی' ];
 
 $rules = [ 'persian_alphabet' ];
@@ -69,7 +70,7 @@ Validator::make( $request, $rules );
 ### Persian numbers
 Validate Persian standard numbers (۰۱۲۳۴۵۶۷۸۹):
 
-```
+``` php
 $request = [ '۰۱۲۳۴۵۶۷۸۹' ];
 
 $rules = [ 'persian_number' ];
@@ -80,7 +81,7 @@ Validator::make( $request, $rules );
 ### Persian Alphabet Number
 Validate Persian alpha num:
 
-```
+``` php
 $request = [ 'فارسی۱۲۳۴۵۶۷۸۹' ];
 
 $rules = [ 'persian_alphabet_number' ];
@@ -91,7 +92,7 @@ Validator::make( $request, $rules );
 ### Iran mobile phone
 Validate Iran mobile phones (irancel, rightel, hamrah-e-aval, ...):
 
-```
+``` php
 $request = [ '09381234567' ];
 
 $rules = [ 'iran_mobile' ];
@@ -102,7 +103,7 @@ Validator::make( $request, $rules );
 ### Sheba number
 Validate Iran bank sheba numbers:
 
-```
+``` php
 $request = [ 'IR062960000000100324200001' ];
 
 $rules = [ 'sheba_number' ];
@@ -113,7 +114,7 @@ Validator::make( $request, $rules );
 ### Iran national code
 Validate Iran national code (melli-code):
 
-```
+``` php
 $request = [ '3240175800' ];
 
 $rules = [ 'melli_code' ];
@@ -124,7 +125,7 @@ Validator::make( $request, $rules );
 ### Payment card number
 Validate Iran payment card numbers:
 
-```
+``` php
 $request = [ '6274129005473742' ];
 
 $rules = [ 'card_number' ];
@@ -135,7 +136,7 @@ Validator::make( $request, $rules );
 ### Iran postal code
 Validate Iran postal code:
 
-```
+``` php
 $request = [ '167197-35744' ];
 
 $rules = [ 'iran_postal_code' ];
@@ -151,3 +152,17 @@ Validator::make( $request, $rules );
 
 ```
 
+## Team
+This component is developed by the following person(s)
+
+| [![Farhad Zand](https://avatars3.githubusercontent.com/u/1936147?v=3&s=130)](https://github.com/iamfarhad) 
+--- |
+| [Farhad Zand](https://github.com/iamfarhad)
+
+## Support This Project
+
+Please contribute in package completion. This is the best support.
+
+## License
+
+The Laravel persian validation Module is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
