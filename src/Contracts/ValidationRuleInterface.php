@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Iamfarhad\Validation\Contracts;
-
 
 interface ValidationRuleInterface
 {

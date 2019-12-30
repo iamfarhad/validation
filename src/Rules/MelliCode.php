@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Iamfarhad\Validation\Rules;
-
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
@@ -18,9 +16,9 @@ class MelliCode extends AbstractValidationRule implements ValidationRuleInterfac
         }
         $sub = 0;
         if (strlen($value) == 8) {
-            $value = '00' . $value;
+            $value = '00'.$value;
         } elseif (strlen($value) == 9) {
-            $value = '0' . $value;
+            $value = '0'.$value;
         }
 
         for ($i = 0; $i <= 8; $i++) {
