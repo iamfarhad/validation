@@ -58,7 +58,7 @@ You can access to validation rules by passing the rules key according blew follo
 ### Persian Alphabet
 Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
 
-```
+``` php
 $request = [ 'فارسی' ];
 
 $rules = [ 'persian_alphabet' ];
@@ -69,7 +69,7 @@ Validator::make( $request, $rules );
 ### Persian numbers
 Validate Persian standard numbers (۰۱۲۳۴۵۶۷۸۹):
 
-```
+``` php
 $request = [ '۰۱۲۳۴۵۶۷۸۹' ];
 
 $rules = [ 'persian_number' ];
@@ -80,7 +80,7 @@ Validator::make( $request, $rules );
 ### Persian Alphabet Number
 Validate Persian alpha num:
 
-```
+``` php
 $request = [ 'فارسی۱۲۳۴۵۶۷۸۹' ];
 
 $rules = [ 'persian_alphabet_number' ];
@@ -91,7 +91,7 @@ Validator::make( $request, $rules );
 ### Iran mobile phone
 Validate Iran mobile phones (irancel, rightel, hamrah-e-aval, ...):
 
-```
+``` php
 $request = [ '09381234567' ];
 
 $rules = [ 'iran_mobile' ];
@@ -102,7 +102,7 @@ Validator::make( $request, $rules );
 ### Sheba number
 Validate Iran bank sheba numbers:
 
-```
+``` php
 $request = [ 'IR062960000000100324200001' ];
 
 $rules = [ 'sheba_number' ];
@@ -113,7 +113,7 @@ Validator::make( $request, $rules );
 ### Iran national code
 Validate Iran national code (melli-code):
 
-```
+``` php
 $request = [ '3240175800' ];
 
 $rules = [ 'melli_code' ];
@@ -124,7 +124,7 @@ Validator::make( $request, $rules );
 ### Payment card number
 Validate Iran payment card numbers:
 
-```
+``` php
 $request = [ '6274129005473742' ];
 
 $rules = [ 'card_number' ];
@@ -135,7 +135,7 @@ Validator::make( $request, $rules );
 ### Iran postal code
 Validate Iran postal code:
 
-```
+``` php
 $request = [ '167197-35744' ];
 
 $rules = [ 'iran_postal_code' ];
