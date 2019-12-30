@@ -1,7 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
+use PHPUnit\Framework\TestCase;
 
 class ValidationTest extends TestCase
 {
@@ -12,7 +12,6 @@ class ValidationTest extends TestCase
     public $parameter;
 
     public $validator;
-
 
     public function testPersianNumber()
     {
@@ -58,7 +57,6 @@ class ValidationTest extends TestCase
         // fail test
         $this->value = 'سلام دنیا.';
         $this->assertFalse($persianAlphabetExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
-
 
         // fail test
         $this->value = 'سلام دنیا hello world';
