@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Iamfarhad\Validation\Rules;
-
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
@@ -23,6 +21,7 @@ class CardNumber extends AbstractValidationRule implements ValidationRuleInterfa
             $temp = $temp > 9 ? $temp - 9 : $temp;
             $sum += $temp;
         }
-        return (bool)($sum % 10 === 0);
+
+        return (bool) ($sum % 10 === 0);
     }
 }

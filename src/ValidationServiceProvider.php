@@ -12,7 +12,6 @@
 namespace Iamfarhad\Validation;
 
 use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
-use Iamfarhad\Validation\Rules\PersianAlphabetNumber;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,17 +30,17 @@ class ValidationServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      *
-     * @return void
      * @throws \ReflectionException
+     *
+     * @return void
      */
     public function boot()
     {
-
         $this->publishes([
-            __DIR__ . '/lang/validation/' . App::getLocale() . '.php' => resource_path('lang/validation/' . App::getLocale() . '.php')
+            __DIR__.'/lang/validation/'.App::getLocale().'.php' => resource_path('lang/validation/'.App::getLocale().'.php'),
         ]);
 
-        foreach (glob(__DIR__ . '/Rules/*.php') as $file) {
+        foreach (glob(__DIR__.'/Rules/*.php') as $file) {
             require_once $file;
 
             // get the file name of the current file without the extension
@@ -49,9 +48,9 @@ class ValidationServiceProvider extends ServiceProvider
             $class = basename($file, '.php');
 
             $Rule = 'Iamfarhad\Validation\Rules';
-            if (class_exists($Rule . '\\' . $class)) {
-                $reflectionClass = new \ReflectionClass($Rule . '\\' . $class);
-                if(!$reflectionClass->implementsInterface(ValidationRuleInterface::class)) {
+            if (class_exists($Rule.'\\'.$class)) {
+                $reflectionClass = new \ReflectionClass($Rule.'\\'.$class);
+                if (!$reflectionClass->implementsInterface(ValidationRuleInterface::class)) {
                     throw new \Exception('this extenstion is not instance of ValidationRuleInterface');
                 }
                 $module = $reflectionClass->newInstanceArgs([]);

@@ -11,18 +11,12 @@
 
 namespace Iamfarhad\Validation\Contracts;
 
-
-use Iamfarhad\Validation\Exception\ValidationRuleEmptyException;
-use Illuminate\Support\ServiceProvider;
-use Validator;
-use App;
-
 abstract class AbstractValidationRule
 {
     public $validationRule = null;
 
     /**
-     * Set validation Rule name
+     * Set validation Rule name.
      *
      * @param string $name
      */
@@ -32,7 +26,7 @@ abstract class AbstractValidationRule
     }
 
     /**
-     * Get validation Rule name
+     * Get validation Rule name.
      *
      * @return string
      */
@@ -42,7 +36,7 @@ abstract class AbstractValidationRule
     }
 
     /**
-     * Register laravel validation extension
+     * Register laravel validation extension.
      */
     public function register(): void
     {
