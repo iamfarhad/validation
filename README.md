@@ -152,3 +152,17 @@ Validator::make( $request, $rules );
 
 ```
 
+## Team
+This component is developed by the following person(s)
+
+| [![Farhad Zand](https://avatars3.githubusercontent.com/u/1936147?v=3&s=130)](https://github.com/iamfarhad) 
+--- |
+| [Farhad Zand](https://github.com/iamfarhad)
+
+## Support This Project
+
+Please contribute in package completion. This is the best support.
+
+## License
+
+The Laravel persian validation Module is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
