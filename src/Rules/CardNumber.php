@@ -11,7 +11,7 @@ class CardNumber extends AbstractValidationRule implements ValidationRuleInterfa
 
     public function rule($attribute, $value, $parameters, $validator): bool
     {
-        if (!preg_match('/^\d{16}$/', $value)) {
+        if (! preg_match('/^\d{16}$/', $value)) {
             return false;
         }
         $sum = 0;
