@@ -13,7 +13,7 @@ Laravel Persian Validation provides validation for Persian alphabet, number and 
 ## Requirement
 
 * Laravel 5.8.*
-* PHP 7.1 >=
+* PHP 7.2 >=
 
 ## Install
 
