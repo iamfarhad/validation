@@ -21,7 +21,7 @@ class ValidationMessages
     {
         $app_lang = resource_path('lang/validation/'.App::getLocale().'.php');
 
-        if (!file_exists($app_lang)) {
+        if (! file_exists($app_lang)) {
             $this->lang = include $app_lang;
         } else {
             $this->lang = include __DIR__.'/lang/validation/'.App::getLocale().'.php';

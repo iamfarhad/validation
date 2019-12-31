@@ -50,7 +50,7 @@ class ValidationServiceProvider extends ServiceProvider
             $Rule = 'Iamfarhad\Validation\Rules';
             if (class_exists($Rule.'\\'.$class)) {
                 $reflectionClass = new \ReflectionClass($Rule.'\\'.$class);
-                if (!$reflectionClass->implementsInterface(ValidationRuleInterface::class)) {
+                if (! $reflectionClass->implementsInterface(ValidationRuleInterface::class)) {
                     throw new \Exception('this extenstion is not instance of ValidationRuleInterface');
                 }
                 $module = $reflectionClass->newInstanceArgs([]);
