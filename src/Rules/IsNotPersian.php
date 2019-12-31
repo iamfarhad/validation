@@ -14,7 +14,7 @@ class IsNotPersian extends AbstractValidationRule implements ValidationRuleInter
         if (is_string($value)) {
             $this->status = (bool) preg_match("/[\x{600}-\x{6FF}]/u", $value);
 
-            return !$this->status;
+            return ! $this->status;
         }
 
         return false;
