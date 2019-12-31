@@ -1,5 +1,2 @@
 php:
   preset: laravel
-  finder:
-    not-name:
-      - typed-properties.php
