@@ -2,6 +2,17 @@
     "name": "iamfarhad/validation",
     "description": "laravel persian validation package",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "validation",
+        "validator",
+        "persian",
+        "farsi",
+        "iran",
+        "lumen",
+        "custom",
+        "rule"
+    ],
     "authors": [
         {
             "name": "farhad zand",
