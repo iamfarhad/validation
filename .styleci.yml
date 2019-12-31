@@ -1,5 +1,9 @@
-php:
-  preset: laravel
-  finder:
-    not-name:
-      - typed-properties.php
+preset: laravel
+
+risky: false
+
+finder:
+  exclude:
+    - "tests"
+  name:
+    - "*.php"
