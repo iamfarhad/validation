@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/iamfarhad/validation.svg?branch=master)](https://travis-ci.com/iamfarhad/validation)
 [![Build Status](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/build.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/build-status/master)
+[![StyleCI](https://github.styleci.io/repos/230574287/shield?branch=master)](https://github.styleci.io/repos/230574287)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamfarhad/validation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iamfarhad/validation/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/iamfarhad/validation/v/stable)](https://packagist.org/packages/iamfarhad/validation)
@@ -14,10 +15,6 @@ Laravel Persian Validation provides validation for Persian alphabet, number and 
 
 * Laravel 5.8.*
 * PHP 7.1 >=
-
-## License
-
-Laravel Persian Validation is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ## Install
 
