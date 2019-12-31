@@ -1,5 +1,21 @@
-php:
-  preset: laravel
-  finder:
-    not-name:
-      - typed-properties.php
+preset: laravel
+
+risky: false
+
+finder:
+  exclude:
+    - "tests"
+  name:
+    - "*.php"
+  not-name:
+    - "*Stub.php"
+  contains:
+    - "Foo"
+  not-contains:
+    - "config"
+  path:
+    - "foo/Stuff"
+  not-path:
+    - "libraries"
+  depth:
+    - "< 3"
