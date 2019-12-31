@@ -1,2 +1,15 @@
 php:
   preset: laravel
+  risky: true
+  enabled:
+    - long_array_syntax
+  disabled:
+    - align_double_arrow
+  finder:
+    exclude:
+      - modules
+      - node_modules
+      - storage
+      - vendor
+    name: "*.php"
+    not-name: "*.blade.php"
