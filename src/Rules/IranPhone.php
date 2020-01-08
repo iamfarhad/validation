@@ -5,7 +5,7 @@ namespace Iamfarhad\Validation\Rules;
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class IranPhone extends AbstractValidationRule implements ValidationRuleInterface
+class IranPhone extends AbstractValidationRule
 {
     public $validationRule = 'iran_phone';
 

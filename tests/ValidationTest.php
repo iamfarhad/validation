@@ -1,6 +1,6 @@
 <?php
 
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
+use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 use PHPUnit\Framework\TestCase;
 
 class ValidationTest extends TestCase
@@ -17,7 +17,7 @@ class ValidationTest extends TestCase
     {
         $persianNumberExtension = new \Iamfarhad\Validation\Rules\PersianNumber();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $persianNumberExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $persianNumberExtension);
 
         // success test
         $this->value = '۴۵۶۷';
@@ -44,7 +44,7 @@ class ValidationTest extends TestCase
     {
         $persianAlphabetExtension = new \Iamfarhad\Validation\Rules\PersianAlpha();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $persianAlphabetExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $persianAlphabetExtension);
 
         // success test
         $this->value = 'سلام دنیا';
@@ -67,7 +67,7 @@ class ValidationTest extends TestCase
     {
         $persianAlphabetNumberExtension = new \Iamfarhad\Validation\Rules\PersianAlphabetNumber();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $persianAlphabetNumberExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $persianAlphabetNumberExtension);
 
         // success test
         $this->value = 'سلام دنیا ۴۵۶۷';
@@ -82,7 +82,7 @@ class ValidationTest extends TestCase
     {
         $iranAddressExtension = new \Iamfarhad\Validation\Rules\IranAddress();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $iranAddressExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $iranAddressExtension);
 
         // success test
         $this->value = 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده - پلاک 46';
@@ -100,7 +100,7 @@ class ValidationTest extends TestCase
     {
         $iranPostalCodeExtension = new \Iamfarhad\Validation\Rules\IranPostalCode();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $iranPostalCodeExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $iranPostalCodeExtension);
 
         // success test
         $this->value = '6385141552';
@@ -131,7 +131,7 @@ class ValidationTest extends TestCase
     {
         $IranMobileExtension = new \Iamfarhad\Validation\Rules\IranMobile();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $IranMobileExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $IranMobileExtension);
 
         // success test
         $this->value = '09120724013';
@@ -170,7 +170,7 @@ class ValidationTest extends TestCase
     {
         $iranPhoneExtension = new \Iamfarhad\Validation\Rules\IranPhone();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $iranPhoneExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $iranPhoneExtension);
 
         // success test
         $this->value = '44614785';
@@ -189,7 +189,7 @@ class ValidationTest extends TestCase
     {
         $iranPhoneWithArea = new \Iamfarhad\Validation\Rules\IranPhoneWithArea();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $iranPhoneWithArea);
+        $this->assertInstanceOf(AbstractValidationRule::class, $iranPhoneWithArea);
 
         // success test
         $this->value = '02144614785';
@@ -208,7 +208,7 @@ class ValidationTest extends TestCase
     {
         $isNotPersian = new \Iamfarhad\Validation\Rules\IsNotPersian();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $isNotPersian);
+        $this->assertInstanceOf(AbstractValidationRule::class, $isNotPersian);
 
         // success test
         $this->value = 'hello world!';
@@ -231,7 +231,7 @@ class ValidationTest extends TestCase
     {
         $melliCodeExtension = new \Iamfarhad\Validation\Rules\MelliCode();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $melliCodeExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $melliCodeExtension);
 
         // success test
         $this->value = '0112169228';
@@ -246,7 +246,7 @@ class ValidationTest extends TestCase
     {
         $shebaNumberExtension = new \Iamfarhad\Validation\Rules\ShebaNumber();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $shebaNumberExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $shebaNumberExtension);
 
         // success test
         $this->value = 'IR930150000001351800087201';
@@ -265,7 +265,7 @@ class ValidationTest extends TestCase
     {
         $cardNumberExtension = new \Iamfarhad\Validation\Rules\CardNumber();
 
-        $this->assertInstanceOf(ValidationRuleInterface::class, $cardNumberExtension);
+        $this->assertInstanceOf(AbstractValidationRule::class, $cardNumberExtension);
 
         // success test
         $this->value = '0590995099116037';

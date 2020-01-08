@@ -15,6 +15,8 @@ abstract class AbstractValidationRule
 {
     public $validationRule = null;
 
+    abstract public function rule($attribute, $value, $parameters, $validator): bool;
+
     /**
      * Set validation Rule name.
      *

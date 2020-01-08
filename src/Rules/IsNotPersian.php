@@ -5,7 +5,7 @@ namespace Iamfarhad\Validation\Rules;
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class IsNotPersian extends AbstractValidationRule implements ValidationRuleInterface
+class IsNotPersian extends AbstractValidationRule
 {
     public $validationRule = 'is_not_persian';
 
