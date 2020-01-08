@@ -16,7 +16,7 @@ abstract class AbstractValidationRule
     /**
      * @var null
      */
-    public $validationRule = null;
+    public $validationRule;
 
     /**
      * @param $attribute
