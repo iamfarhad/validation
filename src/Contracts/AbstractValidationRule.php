@@ -31,7 +31,7 @@ abstract class AbstractValidationRule
     /**
      * Set validation Rule name.
      *
-     * @param string $name
+     * @param  string  $name
      */
     public function setValidationRule(string $name): void
     {
