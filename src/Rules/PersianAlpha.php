@@ -7,7 +7,7 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 class PersianAlpha extends AbstractValidationRule
 {
     /**
-     * @var string $validationRule
+     * @var string
      */
     public $validationRule = 'persian_alphabet';
 

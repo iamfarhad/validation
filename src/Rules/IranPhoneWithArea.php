@@ -7,7 +7,7 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 class IranPhoneWithArea extends AbstractValidationRule
 {
     /**
-     * @var string $validationRule
+     * @var string
      */
     public $validationRule = 'iran_phone_area';
 
