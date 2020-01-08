@@ -7,7 +7,7 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 class IranPostalCode extends AbstractValidationRule
 {
     /**
-     * @var string $validationRule
+     * @var string
      */
     public $validationRule = 'iran_postal_code';
 

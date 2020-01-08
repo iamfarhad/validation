@@ -7,7 +7,7 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 class CardNumber extends AbstractValidationRule
 {
     /**
-     * @var string $validationRule
+     * @var string
      */
     public $validationRule = 'card_number';
 
