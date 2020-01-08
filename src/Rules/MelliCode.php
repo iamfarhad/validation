@@ -6,8 +6,19 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 
 class MelliCode extends AbstractValidationRule
 {
+    /**
+     * @var string $validationRule
+     */
     public $validationRule = 'melli_code';
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @param $validator
+     *
+     * @return bool
+     */
     public function rule($attribute, $value, $parameters, $validator): bool
     {
         if (! preg_match('/^\d{8,10}$/', $value) || preg_match('/^[0]{10}|[1]{10}|[2]{10}|[3]{10}|[4]{10}|[5]{10}|[6]{10}|[7]{10}|[8]{10}|[9]{10}$/', $value)) {
