@@ -3,9 +3,8 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class IranPostalCode extends AbstractValidationRule implements ValidationRuleInterface
+class IranPostalCode extends AbstractValidationRule
 {
     public $validationRule = 'iran_postal_code';
 

@@ -11,7 +11,7 @@
 
 namespace Iamfarhad\Validation;
 
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
+use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -50,7 +50,7 @@ class ValidationServiceProvider extends ServiceProvider
             $Rule = 'Iamfarhad\Validation\Rules';
             if (class_exists($Rule.'\\'.$class)) {
                 $reflectionClass = new \ReflectionClass($Rule.'\\'.$class);
-                if (! $reflectionClass->implementsInterface(ValidationRuleInterface::class)) {
+                if (! $reflectionClass->isInstance((object) AbstractValidationRule::class)) {
                     throw new \Exception('this extenstion is not instance of ValidationRuleInterface');
                 }
                 $module = $reflectionClass->newInstanceArgs([]);

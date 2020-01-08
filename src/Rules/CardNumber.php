@@ -3,9 +3,8 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class CardNumber extends AbstractValidationRule implements ValidationRuleInterface
+class CardNumber extends AbstractValidationRule
 {
     public $validationRule = 'card_number';
 

@@ -12,9 +12,8 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class PersianNumber extends AbstractValidationRule implements ValidationRuleInterface
+class PersianNumber extends AbstractValidationRule
 {
     public $validationRule = 'persian_number';
 

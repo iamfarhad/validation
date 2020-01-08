@@ -3,9 +3,8 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class MelliCode extends AbstractValidationRule implements ValidationRuleInterface
+class MelliCode extends AbstractValidationRule
 {
     public $validationRule = 'melli_code';
 

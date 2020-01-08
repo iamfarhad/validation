@@ -3,9 +3,8 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class ShebaNumber extends AbstractValidationRule implements ValidationRuleInterface
+class ShebaNumber extends AbstractValidationRule
 {
     public $validationRule = 'sheba_number';
 

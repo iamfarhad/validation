@@ -3,9 +3,8 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
-class IranMobile extends AbstractValidationRule implements ValidationRuleInterface
+class IranMobile extends AbstractValidationRule
 {
     public $validationRule = 'iran_mobile';
 
