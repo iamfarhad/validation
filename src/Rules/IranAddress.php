@@ -3,7 +3,6 @@
 namespace Iamfarhad\Validation\Rules;
 
 use Iamfarhad\Validation\Contracts\AbstractValidationRule;
-use Iamfarhad\Validation\Contracts\ValidationRuleInterface;
 
 class IranAddress extends AbstractValidationRule
 {
