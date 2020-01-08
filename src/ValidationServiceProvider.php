@@ -52,7 +52,7 @@ class ValidationServiceProvider extends ServiceProvider
             if (class_exists($Rule.'\\'.$class)) {
                 $reflectionClass = new \ReflectionClass($Rule.'\\'.$class);
                 if (! $reflectionClass->isInstance((object) AbstractValidationRule::class)) {
-                    throw new \Exception('this extenstion is not instance of AbstractValidationRule');
+                    throw new \Exception('this extension is not instance of AbstractValidationRule');
                 }
                 // Register extension
                 $module = $reflectionClass->newInstanceArgs([]);
