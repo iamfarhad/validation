@@ -15,8 +15,19 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 
 class PersianNumber extends AbstractValidationRule
 {
+    /**
+     * @var string
+     */
     public $validationRule = 'persian_number';
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @param $validator
+     *
+     * @return bool
+     */
     public function rule($attribute, $value, $parameters, $validator): bool
     {
         return preg_match('/^[\x{6F0}-\x{6F9}]+$/u', $value);

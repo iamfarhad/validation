@@ -13,8 +13,19 @@ namespace Iamfarhad\Validation\Contracts;
 
 abstract class AbstractValidationRule
 {
+    /**
+     * @var null
+     */
     public $validationRule = null;
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @param $validator
+     *
+     * @return bool
+     */
     abstract public function rule($attribute, $value, $parameters, $validator): bool;
 
     /**

@@ -6,8 +6,19 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 
 class CardNumber extends AbstractValidationRule
 {
+    /**
+     * @var string
+     */
     public $validationRule = 'card_number';
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @param $validator
+     *
+     * @return bool
+     */
     public function rule($attribute, $value, $parameters, $validator): bool
     {
         if (! preg_match('/^\d{16}$/', $value)) {

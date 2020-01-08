@@ -6,8 +6,19 @@ use Iamfarhad\Validation\Contracts\AbstractValidationRule;
 
 class ShebaNumber extends AbstractValidationRule
 {
+    /**
+     * @var string
+     */
     public $validationRule = 'sheba_number';
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @param $parameters
+     * @param $validator
+     *
+     * @return bool
+     */
     public function rule($attribute, $value, $parameters, $validator): bool
     {
         $ibanReplaceValues = [];
