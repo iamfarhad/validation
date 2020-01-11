@@ -33,6 +33,13 @@ Iamfarhad\Validation\ValidationServiceProvider::class
 ## vendor:publish
 You can run vendor:publish command to have custom lang file of package on this path ( resources/lang/validation )
 
+## Testing
+You can run the tests with:
+
+```bash
+composer test
+```
+
 ## Usage
 
 You can access to validation rules by passing the rules key according blew following table:
