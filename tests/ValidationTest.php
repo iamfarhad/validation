@@ -256,8 +256,6 @@ class ValidationTest extends TestCase
         // fail test
         $this->value = '011A169227';
         $this->assertFalse($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
-
-
     }
 
     public function testShebaNumber()
