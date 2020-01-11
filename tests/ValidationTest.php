@@ -225,6 +225,10 @@ class ValidationTest extends TestCase
         // fail test
         $this->value = '۴۵۶۷';
         $this->assertFalse($isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = 25874;
+        $this->assertFalse($isNotPersian->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
     public function testMelliCode()
@@ -237,9 +241,23 @@ class ValidationTest extends TestCase
         $this->value = '0112169228';
         $this->assertTrue($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
 
+        // success test
+        $this->value = '57000700';
+        $this->assertTrue($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // success test
+        $this->value = '057000700';
+        $this->assertTrue($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
         // fail test
         $this->value = '0112169227';
         $this->assertFalse($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '011A169227';
+        $this->assertFalse($melliCodeExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+
     }
 
     public function testShebaNumber()
@@ -258,6 +276,10 @@ class ValidationTest extends TestCase
 
         // fail test
         $this->value = 'IR930150000001351800087202';
+        $this->assertFalse($shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
+
+        // fail test
+        $this->value = '';
         $this->assertFalse($shebaNumberExtension->rule($this->attribute, $this->value, $this->parameter, $this->value));
     }
 
