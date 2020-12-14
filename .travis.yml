@@ -34,6 +34,8 @@ matrix:
       env: FRAMEWORK_VERSION=laravel/framework:8.*
     - php: 7.4
       env: FRAMEWORK_VERSION=laravel/framework:8.*
+    - php: 8.0
+      env: FRAMEWORK_VERSION=laravel/framework:8.*
 
 before_install:
   - phpenv config-rm xdebug.ini || true
