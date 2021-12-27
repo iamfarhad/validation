@@ -16,7 +16,6 @@ class IranPhoneWithArea extends AbstractValidationRule
      * @param $value
      * @param $parameters
      * @param $validator
-     *
      * @return bool
      */
     public function rule($attribute, $value, $parameters, $validator): bool

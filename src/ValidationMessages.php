@@ -38,7 +38,6 @@ class ValidationMessages
      * @param $message
      * @param $attribute
      * @param $rule
-     *
      * @return string
      */
     public function message($message, $attribute, $rule): string
