@@ -1,3 +1,7 @@
+build:
+  environment:
+    php: 8.0.14
+
 filter:
   excluded_paths: [tests/*]
 
