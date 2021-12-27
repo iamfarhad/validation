@@ -31,8 +31,8 @@ class ValidationServiceProvider extends ServiceProvider
      * Bootstrap services.
      *
      * @return void
-     * @throws \Exception
      *
+     * @throws \Exception
      * @throws \ReflectionException
      */
     public function boot()

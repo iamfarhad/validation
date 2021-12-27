@@ -23,7 +23,6 @@ abstract class AbstractValidationRule
      * @param $value
      * @param $parameters
      * @param $validator
-     *
      * @return bool
      */
     abstract public function rule($attribute, $value, $parameters, $validator): bool;
