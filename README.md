@@ -23,15 +23,15 @@ Via Composer
 $ composer require iamfarhad/validation
 ```
 
-## Config
+The package will automatically register itself.
 
-Add the following provider to providers part of config/app.php
-``` php
-Iamfarhad\Validation\ValidationRulesServiceProvider::class
+### Translations
+
+If you wish to edit the package translations, you can run the following command to publish them into your `resources/lang` folder
+
+```bash
+php artisan vendor:publish --provider="Spatie\ValidationRules\ValidationRulesServiceProvider"
 ```
-
-## vendor:publish
-You can run vendor:publish command to have custom lang file of package on this path ( resources/lang/validation )
 
 ## Testing
 You can run the tests with:
