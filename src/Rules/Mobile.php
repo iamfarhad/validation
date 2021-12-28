@@ -4,7 +4,7 @@ namespace Iamfarhad\Validation\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class IsNotPersian implements Rule
+class Mobile implements Rule
 {
     /**
      * @var string
@@ -15,16 +15,12 @@ class IsNotPersian implements Rule
     {
         $this->attribute = $attribute;
 
-        if (is_string($value)) {
-            return ! preg_match("/[\x{600}-\x{6FF}]/u", $value);
-        }
-
-        return false;
+        return preg_match('/^((0)(9){1}[0-9]{9})+$/', $value);
     }
 
     public function message(): string
     {
-        return __('validationRules::messages.isNotPersian', [
+        return __('validationRules::messages.mobile', [
             'attribute' => $this->attribute,
         ]);
     }

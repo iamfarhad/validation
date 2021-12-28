@@ -2,24 +2,19 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Iamfarhad\Validation\Contracts\AbstractValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 
-class CardNumber extends AbstractValidationRule
+class CardNumber implements Rule
 {
     /**
      * @var string
      */
-    public $validationRule = 'card_number';
+    protected $attribute;
 
-    /**
-     * @param $attribute
-     * @param $value
-     * @param $parameters
-     * @param $validator
-     * @return bool
-     */
-    public function rule($attribute, $value, $parameters, $validator): bool
+    public function passes($attribute, $value): bool
     {
+        $this->attribute = $attribute;
+
         if (! preg_match('/^\d{16}$/', $value)) {
             return false;
         }
@@ -32,5 +27,12 @@ class CardNumber extends AbstractValidationRule
         }
 
         return (bool) ($sum % 10 === 0);
+    }
+
+    public function message(): string
+    {
+        return __('validationRules::messages.cardNumber', [
+            'attribute' => $this->attribute,
+        ]);
     }
 }

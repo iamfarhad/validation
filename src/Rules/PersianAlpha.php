@@ -2,24 +2,26 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Iamfarhad\Validation\Contracts\AbstractValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 
-class PersianAlpha extends AbstractValidationRule
+class PersianAlpha implements Rule
 {
     /**
      * @var string
      */
-    public $validationRule = 'persian_alphabet';
+    protected $attribute;
 
-    /**
-     * @param $attribute
-     * @param $value
-     * @param $parameters
-     * @param $validator
-     * @return bool
-     */
-    public function rule($attribute, $value, $parameters, $validator): bool
+    public function passes($attribute, $value): bool
     {
-        return (bool) preg_match("/^[\x{600}-\x{6FF}\x{200c}\x{064b}\x{064d}\x{064c}\x{064e}\x{064f}\x{0650}\x{0651}\s]+$/u", $value);
+        $this->attribute = $attribute;
+
+        return preg_match("/^[\x{600}-\x{6FF}\x{200c}\x{064b}\x{064d}\x{064c}\x{064e}\x{064f}\x{0650}\x{0651}\s]+$/u", $value);
+    }
+
+    public function message(): string
+    {
+        return __('validationRules::messages.persianAlpha', [
+            'attribute' => $this->attribute,
+        ]);
     }
 }

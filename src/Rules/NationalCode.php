@@ -2,24 +2,19 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Iamfarhad\Validation\Contracts\AbstractValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 
-class MelliCode extends AbstractValidationRule
+class NationalCode implements Rule
 {
     /**
      * @var string
      */
-    public $validationRule = 'melli_code';
+    protected $attribute;
 
-    /**
-     * @param $attribute
-     * @param $value
-     * @param $parameters
-     * @param $validator
-     * @return bool
-     */
-    public function rule($attribute, $value, $parameters, $validator): bool
+    public function passes($attribute, $value): bool
     {
+        $this->attribute = $attribute;
+
         if (! preg_match('/^\d{8,10}$/', $value) || preg_match('/^[0]{10}|[1]{10}|[2]{10}|[3]{10}|[4]{10}|[5]{10}|[6]{10}|[7]{10}|[8]{10}|[9]{10}$/', $value)) {
             return false;
         }
@@ -45,5 +40,12 @@ class MelliCode extends AbstractValidationRule
         }
 
         return false;
+    }
+
+    public function message(): string
+    {
+        return __('validationRules::messages.nationalCode', [
+            'attribute' => $this->attribute,
+        ]);
     }
 }

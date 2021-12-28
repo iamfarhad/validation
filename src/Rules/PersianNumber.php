@@ -1,34 +1,28 @@
 <?php
 
-/*
- * This file is part of persian validation package
- *
- * (c) Farhad Zand <farhad.pd@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Iamfarhad\Validation\Rules;
 
-use Iamfarhad\Validation\Contracts\AbstractValidationRule;
+use Illuminate\Contracts\Validation\Rule;
 
-class PersianNumber extends AbstractValidationRule
+class PersianNumber implements Rule
 {
     /**
      * @var string
      */
-    public $validationRule = 'persian_number';
+    protected $attribute;
 
-    /**
-     * @param $attribute
-     * @param $value
-     * @param $parameters
-     * @param $validator
-     * @return bool
-     */
-    public function rule($attribute, $value, $parameters, $validator): bool
+    public function passes($attribute, $value): bool
     {
+        $this->attribute = $attribute;
+
         return preg_match('/^[\x{6F0}-\x{6F9}]+$/u', $value);
+    }
+
+
+    public function message(): string
+    {
+        return __('validationRules::messages.persianNumber', [
+            'attribute' => $this->attribute,
+        ]);
     }
 }

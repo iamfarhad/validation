@@ -13,7 +13,7 @@ Laravel Persian Validation provides validation for Persian alphabet, number and 
 ## Requirement
 
 * Laravel  6.x | 8.x
-* PHP 7.3 | 7.4 | 8.0 | 8.1
+* PHP 7.3 | 8.0 | 8.1
 
 ## Install
 
@@ -27,7 +27,7 @@ $ composer require iamfarhad/validation
 
 Add the following provider to providers part of config/app.php
 ``` php
-Iamfarhad\Validation\ValidationServiceProvider::class
+Iamfarhad\Validation\ValidationRulesServiceProvider::class
 ```
 
 ## vendor:publish
@@ -44,115 +44,100 @@ composer test
 
 You can access to validation rules by passing the rules key according blew following table:
 
-| Rules | Descriptions |
-| --- | --- |
-| persian_alphabet | Persian alphabet |
-| persian_number | Persian numbers |
-| persian_alphabet_number | Persian alphabet and numbers |
-| iran_mobile | Iran mobile numbers |
-| sheba_number | Iran Sheba numbers |
-| melli_code | Iran melli code |
-| is_not_persian | Doesn't accept Persian alphabet and numbers |
-| iran_phone | Iran phone numbers |
-| iran_phone_area | Iran phone numbers with area code |
-| card_number | Payment card numbers |
-| iran_address | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters|
-| iran_postal_code | Iran postal code |
+| Rules               | Descriptions                                                                                      |
+|---------------------|---------------------------------------------------------------------------------------------------|
+| new PersianAlpha()  | Persian alphabet                                                                                  |
+| new PersianNumber() | Persian numbers                                                                                   |
+| new Mobile()        | Iran mobile numbers                                                                               |
+| new Sheba()         | Iran Sheba numbers                                                                                |
+| new NationalCode()  | Iran melli code                                                                                   |
+| new IsNotPersian()  | Doesn't accept Persian alphabet and numbers                                                       |
+| new Mobile()        | Iran mobile numbers                                                                               |
+| new Phone()         | Iran phone numbers                                                                                |
+| new PhoneArea()     | Iran phone numbers with area code                                                                 |
+| new CardNumber()    | Payment card numbers                                                                              |
+| new Address()       | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters |
+| new PostalCode()    | Iran postal code                                                                                  |
 
 ### Persian Alphabet
 Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
 
 ``` php
-$request = [ 'فارسی' ];
-
-$rules = [ 'persian_alphabet' ];
-
-Validator::make( $request, $rules );
+Validator::make(
+    ['name' => 'فارسی'],
+    ['name' => [new PersianAlpha()]
+);
 ```
 
 ### Persian numbers
 Validate Persian standard numbers (۰۱۲۳۴۵۶۷۸۹):
 
 ``` php
-$request = [ '۰۱۲۳۴۵۶۷۸۹' ];
-
-$rules = [ 'persian_number' ];
-
-Validator::make( $request, $rules );
-```
-
-### Persian Alphabet Number
-Validate Persian alpha num:
-
-``` php
-$request = [ 'فارسی۱۲۳۴۵۶۷۸۹' ];
-
-$rules = [ 'persian_alphabet_number' ];
-
-Validator::make( $request, $rules );
+Validator::make(
+    ['num' => '۰۱۲۳۴۵۶۷۸۹'],
+    ['num' => [new PersianNumber()]
+);
 ```
 
 ### Iran mobile phone
 Validate Iran mobile phones (irancel, rightel, hamrah-e-aval, ...):
 
 ``` php
-$request = [ '09381234567' ];
-
-$rules = [ 'iran_mobile' ];
-
-Validator::make( $request, $rules );
+Validator::make(
+    ['mob' => '09127777777'],
+    ['mob' => [new Mobile()]
+);
 ```
 
 ### Sheba number
 Validate Iran bank sheba numbers:
 
 ``` php
-$request = [ 'IR062960000000100324200001' ];
-
-$rules = [ 'sheba_number' ];
-
-Validator::make( $request, $rules );
+Validator::make(
+    ['sheba_number' => 'IR062960000000100324200001'],
+    ['sheba_number' => [new Sheba()]
+);
 ```
 
 ### Iran national code
 Validate Iran national code (melli-code):
 
 ``` php
-$request = [ '3240175800' ];
-
-$rules = [ 'melli_code' ];
-
-Validator::make( $request, $rules );
+Validator::make(
+    ['codeMelli' => '3240175800'],
+    ['codeMelli' => [new NationalCode()]
+);
 ```
 
 ### Payment card number
 Validate Iran payment card numbers:
 
 ``` php
-$request = [ '6274129005473742' ];
-
-$rules = [ 'card_number' ];
-
-Validator::make( $request, $rules );
+Validator::make(
+    ['card' => '6274129005473742'],
+    ['card' => [new CardNumber()]
+);
 ```
 
 ### Iran postal code
 Validate Iran postal code:
 
 ``` php
-$request = [ '167197-35744' ];
+Validator::make(
+    ['postal' => '16719735744''],
+    ['postal' => [new PostalCode()]
+);
+```
 
-$rules = [ 'iran_postal_code' ];
+```php
+// in a `FormRequest`
 
-Validator::make( $request, $rules );
-
-
-$request = [ '16719735744' ];
-
-$rules = [ 'iran_postal_code' ];
-
-Validator::make( $request, $rules );
-
+public function rules()
+{
+    return [
+        'NationalCode' => ['required', new NationalCode()],
+    ];
+}
 ```
 
 ## Team
