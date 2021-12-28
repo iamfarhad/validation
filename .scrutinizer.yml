@@ -1,22 +1,15 @@
-build:
-  environment:
-    php: 8.1.1
+checks:
+  php: true
 
 filter:
-  excluded_paths: [tests/*]
+  excluded_paths:
+    - "tests/"
 
-checks:
+coding_style:
   php:
-    remove_extra_empty_lines: true
-    remove_php_closing_tag: true
-    remove_trailing_whitespace: true
-    fix_use_statements:
-      remove_unused: true
-      preserve_multiple: false
-      preserve_blanklines: true
-      order_alphabetically: true
-    fix_php_opening_tag: true
-    fix_linefeed: true
-    fix_line_ending: true
-    fix_identation_4spaces: true
-    fix_doc_comments: true
+    spaces:
+      around_operators:
+        concatenation: true
+
+tools:
+  external_code_coverage: true
