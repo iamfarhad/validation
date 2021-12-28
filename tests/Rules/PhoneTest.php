@@ -3,8 +3,8 @@
 namespace Iamfarhad\Validation\Tests\Rules;
 
 use Iamfarhad\Validation\Rules\Phone;
-use Illuminate\Support\Facades\Validator;
 use Iamfarhad\Validation\Tests\TestCase;
+use Illuminate\Support\Facades\Validator;
 
 class PhoneTest extends TestCase
 {

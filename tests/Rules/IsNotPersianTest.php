@@ -3,8 +3,8 @@
 namespace Iamfarhad\Validation\Tests\Rules;
 
 use Iamfarhad\Validation\Rules\IsNotPersian;
-use Illuminate\Support\Facades\Validator;
 use Iamfarhad\Validation\Tests\TestCase;
+use Illuminate\Support\Facades\Validator;
 
 class IsNotPersianTest extends TestCase
 {

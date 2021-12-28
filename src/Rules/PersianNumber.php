@@ -18,7 +18,6 @@ class PersianNumber implements Rule
         return preg_match('/^[\x{6F0}-\x{6F9}]+$/u', $value);
     }
 
-
     public function message(): string
     {
         return __('validationRules::messages.persianNumber', [

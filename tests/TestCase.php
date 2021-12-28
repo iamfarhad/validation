@@ -1,4 +1,5 @@
 <?php
+
 namespace Iamfarhad\Validation\Tests;
 
 use Iamfarhad\Validation\ValidationRulesServiceProvider;

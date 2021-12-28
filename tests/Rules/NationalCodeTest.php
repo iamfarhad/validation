@@ -3,8 +3,8 @@
 namespace Iamfarhad\Validation\Tests\Rules;
 
 use Iamfarhad\Validation\Rules\NationalCode;
-use Illuminate\Support\Facades\Validator;
 use Iamfarhad\Validation\Tests\TestCase;
+use Illuminate\Support\Facades\Validator;
 
 class NationalCodeTest extends TestCase
 {

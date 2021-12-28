@@ -2,9 +2,9 @@
 
 namespace Iamfarhad\Validation\Tests\Rules;
 
-use Illuminate\Support\Facades\Validator;
 use Iamfarhad\Validation\Rules\PersianNumber;
 use Iamfarhad\Validation\Tests\TestCase;
+use Illuminate\Support\Facades\Validator;
 
 class PersianNumberTest extends TestCase
 {

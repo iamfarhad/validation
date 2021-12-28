@@ -1,9 +1,10 @@
 <?php
+
 namespace Iamfarhad\Validation\Tests\Rules;
 
 use Iamfarhad\Validation\Rules\PhoneArea;
-use Illuminate\Support\Facades\Validator;
 use Iamfarhad\Validation\Tests\TestCase;
+use Illuminate\Support\Facades\Validator;
 
 class PhoneAreaTest extends TestCase
 {

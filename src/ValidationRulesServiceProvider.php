@@ -1,4 +1,5 @@
 <?php
+
 namespace Iamfarhad\Validation;
 
 use Illuminate\Support\ServiceProvider;
