@@ -21,8 +21,8 @@
         }
     ],
     "require": {
-        "php": "^8.0|^8.1",
-        "illuminate/support": "^8.0"
+        "php": "^7.3|^7.4|^8.0|^8.1",
+        "illuminate/support": "^6.0|^8.0"
     },
     "autoload": {
         "psr-4": {
