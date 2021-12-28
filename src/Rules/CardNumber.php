@@ -15,7 +15,7 @@ class CardNumber implements Rule
     {
         $this->attribute = $attribute;
 
-        if (! preg_match('/^\d{16}$/', $value)) {
+        if (!preg_match('/^\d{16}$/', $value)) {
             return false;
         }
         $sum = 0;
