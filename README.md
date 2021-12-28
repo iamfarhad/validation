@@ -124,7 +124,7 @@ Validate Iran postal code:
 
 ``` php
 Validator::make(
-    ['postal' => '16719735744''],
+    ['postal' => '16719735744'],
     ['postal' => [new PostalCode()]
 );
 ```
