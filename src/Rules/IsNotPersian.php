@@ -16,7 +16,7 @@ class IsNotPersian implements Rule
         $this->attribute = $attribute;
 
         if (is_string($value)) {
-            return !preg_match("/[\x{600}-\x{6FF}]/u", $value);
+            return ! preg_match("/[\x{600}-\x{6FF}]/u", $value);
         }
 
         return false;
