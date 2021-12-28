@@ -17,10 +17,10 @@ class Sheba implements Rule
 
         $ibanReplaceValues = [];
 
-        if (! empty($value)) {
+        if (!empty($value)) {
             $value = preg_replace('/[\W_]+/', '', strtoupper($value));
 
-            if ((4 > strlen($value) || strlen($value) > 34) || (is_numeric($value[0]) || is_numeric($value[1])) || (! is_numeric($value[2]) || ! is_numeric($value[3]))) {
+            if ((4 > strlen($value) || strlen($value) > 34) || (is_numeric($value[0]) || is_numeric($value[1])) || (!is_numeric($value[2]) || !is_numeric($value[3]))) {
                 return false;
             }
 
