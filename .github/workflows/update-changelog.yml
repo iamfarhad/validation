@@ -19,9 +19,7 @@ jobs:
         with:
           latest-version: ${{ github.event.release.name }}
           release-notes: ${{ github.event.release.body }}
-          commit_author_email: farhad.pd@gmail.com
-          commit_author_name: Farhad Zand
-          commit_message: Update Changelog
+          path-to-changelog: CHANGELOG.md
 
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v4
