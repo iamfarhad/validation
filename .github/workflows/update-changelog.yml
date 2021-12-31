@@ -1,3 +1,4 @@
+# .github/workflows/update-changelog.yaml
 name: "Update Changelog"
 
 on:
