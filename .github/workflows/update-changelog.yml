@@ -19,7 +19,6 @@ jobs:
         with:
           latest-version: ${{ github.event.release.name }}
           release-notes: ${{ github.event.release.body }}
-          path-to-changelog: CHANGELOG.md
 
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v4
