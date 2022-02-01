@@ -23,7 +23,7 @@ The package will automatically register itself.
 
 ### Translations
 
-If you wish to edit the package translations, you can run the following command to publish them into your `resources/lang` folder
+If you wish to edit the package translations, you can run the following command to publish them into your `resources/lang` (or `/lang` in Laravel 9.x) folder
 
 ```bash
 php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationRulesServiceProvider"
