@@ -2,6 +2,20 @@
 
 All notable changes to `iamfarhad/validation` will be documented in this file
 
+## v3.0.0 - 2023-02-21
+
+### What's Changed
+
+- support-laravel-10 by @farshidrezaei in https://github.com/iamfarhad/validation/pull/104
+- remove support laravel 6 and 8
+- remove support php 7.*
+
+### New Contributors
+
+- @farshidrezaei made their first contribution in https://github.com/iamfarhad/validation/pull/104
+
+**Full Changelog**: https://github.com/iamfarhad/validation/compare/v2.3.2...v3.0.0
+
 ## v2.3.2 - 2022-02-01
 
 ## What's Changed
