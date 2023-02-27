@@ -4,7 +4,10 @@
 
 # Laravel Persian Validation
 
-Laravel Persian Validation provides validation for Persian alphabet, number and etc.
+The Laravel Persian Validation package offers comprehensive validation for the Persian language, including validation for Persian alphabets, numbers, and other Persian-specific elements. This package allows developers to ensure that their Persian language input data meets the necessary validation criteria, enhancing the reliability and accuracy of their applications. With Laravel Persian Validation, developers can easily incorporate Persian language validation into their Laravel projects, providing a more inclusive and user-friendly experience for Persian-speaking users.
+
+
+
 
 ## Requirement
 
@@ -19,11 +22,19 @@ Via Composer
 $ composer require iamfarhad/validation
 ```
 
-The package will automatically register itself.
+This package is designed to automatically register itself without requiring any additional configuration.
+
 
 ### Translations
 
-If you wish to edit the package translations, you can run the following command to publish them into your `resources/lang` (or `/lang` in Laravel 9.x) folder
+If you would like to customize the translations for the Laravel Persian Validation package, you can use the following command to publish them into your project's resources/lang directory:
+
+```bash
+php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationRulesServiceProvider" --tag="translations"
+
+```
+If you are using Laravel 9.x or later, the translations will be published to the /lang directory instead. Once the translations are published, you can modify them as needed to suit your project's requirements.
+
 
 ```bash
 php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationRulesServiceProvider"
@@ -54,6 +65,7 @@ You can access to validation rules by passing the rules key according blew follo
 | new CardNumber()    | Payment card numbers                                                                              |
 | new Address()       | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters |
 | new PostalCode()    | Iran postal code                                                                                  |
+| new Username()      | Username format                                                                                   |
 
 ### Persian Alphabet
 Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
@@ -139,14 +151,20 @@ public function rules()
 ## Team
 This component is developed by the following person(s)
 
-| [![Farhad Zand](https://avatars3.githubusercontent.com/u/1936147?v=3&s=130)](https://github.com/iamfarhad) 
---- |
-| [Farhad Zand](https://github.com/iamfarhad)
+| [![Farhad Zand](https://avatars3.githubusercontent.com/u/1936147?v=3&s=130)](https://github.com/iamfarhad) |
+|------------------------------------------------------------------------------------------------------------|
+| [Farhad Zand](https://github.com/iamfarhad)                                                                |
 
 ## Support This Project
 
-Please contribute in package completion. This is the best support.
+Great! It's always helpful to have more contributors to a package. Here are a few ways you can contribute to the package completion:
 
+* Report Issues: If you find any bugs or issues with the package, you can report them on the package's GitHub repository. Be sure to provide detailed steps to reproduce the issue and any relevant code snippets.
+* Submit Pull Requests: If you have a fix for a bug or an improvement to the package, you can submit a pull request on the package's GitHub repository. Be sure to follow the guidelines for contributing and to test your changes thoroughly.
+* Improve Documentation: If you find any gaps in the package's documentation, you can contribute by improving the existing documentation or adding new documentation. You can do this by submitting a pull request on the package's GitHub repository.
+* Spread the Word: You can help the package by spreading the word about it on social media, developer forums, and other channels. This can help attract more contributors and users to the package.
+
+Remember that contributing to open-source projects like this package is a collaborative effort, and every little bit helps. Thank you for considering contributing!
 ## License
 
 The Laravel persian validation Module is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

@@ -4,18 +4,15 @@ namespace Iamfarhad\Validation\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class Phone implements Rule
+final class Phone implements Rule
 {
-    /**
-     * @var string
-     */
-    protected $attribute;
+    private ?string $attribute = null;
 
     public function passes($attribute, $value): bool
     {
         $this->attribute = $attribute;
 
-        return preg_match('/^[2-9][0-9]{7}+$/', $value);
+        return preg_match('#^[2-9]\d{7}+$#', $value);
     }
 
     public function message(): string

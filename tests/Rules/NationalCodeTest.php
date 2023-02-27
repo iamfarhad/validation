@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\NationalCode;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class NationalCodeTest extends TestCase
+final class NationalCodeTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\NationalCode $nationalCode;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new NationalCode();
+        $this->nationalCode = new NationalCode();
     }
 
     public function test_valid_persian_national_code(): void
     {
-        $this->assertTrue($this->rule->passes('national_code', '0112169228'));
+        $this->assertTrue($this->nationalCode->passes('national_code', '0112169228'));
     }
 
     public function test_invalid_persian_national_code(): void
     {
-        $this->assertFalse($this->rule->passes('national_code', '0112169229'));
+        $this->assertFalse($this->nationalCode->passes('national_code', '0112169229'));
     }
 
     public function test_valid_persian_national_code_validator(): void

@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\Sheba;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class ShebaTest extends TestCase
+final class ShebaTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\Sheba $sheba;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new Sheba();
+        $this->sheba = new Sheba();
     }
 
     public function test_valid_sheba_number(): void
     {
-        $this->assertTrue($this->rule->passes('sheba', 'IR930150000001351800087201'));
+        $this->assertTrue($this->sheba->passes('sheba', 'IR930150000001351800087201'));
     }
 
     public function test_invalid_sheba_number(): void
     {
-        $this->assertFalse($this->rule->passes('sheba', 'IR930150000001351800087202'));
+        $this->assertFalse($this->sheba->passes('sheba', 'IR930150000001351800087202'));
     }
 
     public function test_valid_sheba_number_validator(): void

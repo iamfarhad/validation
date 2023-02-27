@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\CardNumber;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class CardNumberTest extends TestCase
+final class CardNumberTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\CardNumber $cardNumber;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new CardNumber();
+        $this->cardNumber = new CardNumber();
     }
 
     public function test_valid_persian_card_number(): void
     {
-        $this->assertTrue($this->rule->passes('card_number', '0590995099116037'));
+        $this->assertTrue($this->cardNumber->passes('card_number', '0590995099116037'));
     }
 
     public function test_invalid_persian_card_number(): void
     {
-        $this->assertFalse($this->rule->passes('card_number', '0590995099116038'));
+        $this->assertFalse($this->cardNumber->passes('card_number', '0590995099116038'));
     }
 
     public function test_valid_persian_card_number_validator(): void

@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\Address;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class AddressTest extends TestCase
+final class AddressTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\Address $address;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new Address();
+        $this->address = new Address();
     }
 
     public function test_valid_persian_address(): void
     {
-        $this->assertTrue($this->rule->passes('address', 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده - پلاک 46'));
+        $this->assertTrue($this->address->passes('address', 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده - پلاک 46'));
     }
 
     public function test_invalid_persian_address(): void
     {
-        $this->assertFalse($this->rule->passes('address', 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده $ - پلاک 46'));
+        $this->assertFalse($this->address->passes('address', 'تهران خیابان ولیصعر - تقاطع فاطمی کوچه عبده $ - پلاک 46'));
     }
 
     public function test_valid_persian_address_validator(): void

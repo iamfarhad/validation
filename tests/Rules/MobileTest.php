@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\Mobile;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class MobileTest extends TestCase
+final class MobileTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\Mobile $mobile;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new Mobile();
+        $this->mobile = new Mobile();
     }
 
     public function test_valid_persian_mobile_number(): void
     {
-        $this->assertTrue($this->rule->passes('mobile', '09127777777'));
+        $this->assertTrue($this->mobile->passes('mobile', '09127777777'));
     }
 
     public function test_invalid_persian_mobile_number(): void
     {
-        $this->assertFalse($this->rule->passes('mobile', '091277777777'));
+        $this->assertFalse($this->mobile->passes('mobile', '091277777777'));
     }
 
     public function test_valid_persian_mobile_number_validator(): void

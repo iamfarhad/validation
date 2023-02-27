@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\PhoneArea;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class PhoneAreaTest extends TestCase
+final class PhoneAreaTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\PhoneArea $phoneArea;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new PhoneArea();
+        $this->phoneArea = new PhoneArea();
     }
 
     public function test_valid_persian_phone_area_number(): void
     {
-        $this->assertTrue($this->rule->passes('phone', '08132214785'));
+        $this->assertTrue($this->phoneArea->passes('phone', '08132214785'));
     }
 
     public function test_invalid_persian_phone_area_number(): void
     {
-        $this->assertFalse($this->rule->passes('phone', '081322147853'));
+        $this->assertFalse($this->phoneArea->passes('phone', '081322147853'));
     }
 
     public function test_valid_persian_phone_area_number_validator(): void

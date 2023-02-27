@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\PostalCode;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class PostalCodeTest extends TestCase
+final class PostalCodeTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\PostalCode $postalCode;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new PostalCode();
+        $this->postalCode = new PostalCode();
     }
 
     public function test_valid_persian_postal_code(): void
     {
-        $this->assertTrue($this->rule->passes('postal_code', '6385141552'));
+        $this->assertTrue($this->postalCode->passes('postal_code', '6385141552'));
     }
 
     public function test_invalid_persian_postal_code(): void
     {
-        $this->assertFalse($this->rule->passes('postal_code', '63851-4122552'));
+        $this->assertFalse($this->postalCode->passes('postal_code', '63851-4122552'));
     }
 
     public function test_valid_persian_postal_code_validator(): void

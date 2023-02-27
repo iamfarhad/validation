@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\IsNotPersian;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class IsNotPersianTest extends TestCase
+final class IsNotPersianTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\IsNotPersian $isNotPersian;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new IsNotPersian();
+        $this->isNotPersian = new IsNotPersian();
     }
 
     public function test_valid_is_not_persian(): void
     {
-        $this->assertTrue($this->rule->passes('is_not_persian', 'hello world!'));
+        $this->assertTrue($this->isNotPersian->passes('is_not_persian', 'hello world!'));
     }
 
     public function test_invalid_is_not_persian(): void
     {
-        $this->assertFalse($this->rule->passes('is_not_persian', 'سلام دنیا'));
+        $this->assertFalse($this->isNotPersian->passes('is_not_persian', 'سلام دنیا'));
     }
 
     public function test_valid_is_not_persian_validator(): void

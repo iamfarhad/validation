@@ -4,19 +4,16 @@ namespace Iamfarhad\Validation\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class IsNotPersian implements Rule
+final class IsNotPersian implements Rule
 {
-    /**
-     * @var string
-     */
-    protected $attribute;
+    private ?string $attribute = null;
 
     public function passes($attribute, $value): bool
     {
         $this->attribute = $attribute;
 
         if (is_string($value)) {
-            return ! preg_match("/[\x{600}-\x{6FF}]/u", $value);
+            return ! preg_match("#[\x{600}-\x{6FF}]#u", $value);
         }
 
         return false;

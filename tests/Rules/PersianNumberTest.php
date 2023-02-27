@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\PersianNumber;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class PersianNumberTest extends TestCase
+final class PersianNumberTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\PersianNumber $persianNumber;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new PersianNumber();
+        $this->persianNumber = new PersianNumber();
     }
 
     public function test_valid_persian_number(): void
     {
-        $this->assertTrue($this->rule->passes('class_number', '۲۱۳۴'));
+        $this->assertTrue($this->persianNumber->passes('class_number', '۲۱۳۴'));
     }
 
     public function test_invalid_persian_number(): void
     {
-        $this->assertFalse($this->rule->passes('class_number', '2134'));
+        $this->assertFalse($this->persianNumber->passes('class_number', '2134'));
     }
 
     public function test_valid_persian_number_validator(): void

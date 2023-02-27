@@ -4,7 +4,7 @@ namespace Iamfarhad\Validation;
 
 use Illuminate\Support\ServiceProvider;
 
-class ValidationRulesServiceProvider extends ServiceProvider
+final class ValidationRulesServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {

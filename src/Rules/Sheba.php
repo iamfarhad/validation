@@ -4,12 +4,9 @@ namespace Iamfarhad\Validation\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class Sheba implements Rule
+final class Sheba implements Rule
 {
-    /**
-     * @var string
-     */
-    protected $attribute;
+    private ?string $attribute = null;
 
     public function passes($attribute, $value): bool
     {
@@ -18,9 +15,40 @@ class Sheba implements Rule
         $ibanReplaceValues = [];
 
         if (! empty($value)) {
-            $value = preg_replace('/[\W_]+/', '', strtoupper($value));
+            $value = preg_replace('#[\W_]+#', '', strtoupper($value));
+            if (4 > strlen($value)) {
+                return false;
+            }
 
-            if ((4 > strlen($value) || strlen($value) > 34) || (is_numeric($value[0]) || is_numeric($value[1])) || (! is_numeric($value[2]) || ! is_numeric($value[3]))) {
+            if (strlen($value) > 34) {
+                return false;
+            }
+
+            if (is_numeric($value[0])) {
+                return false;
+            }
+            if (is_numeric($value[1])) {
+                return false;
+            }
+            if (is_numeric($value[0])) {
+                return false;
+            }
+
+            if (is_numeric($value[1])) {
+                return false;
+            }
+
+            if (! is_numeric($value[2])) {
+                return false;
+            }
+            if (! is_numeric($value[3])) {
+                return false;
+            }
+            if (! is_numeric($value[2])) {
+                return false;
+            }
+
+            if (! is_numeric($value[3])) {
                 return false;
             }
 
@@ -36,7 +64,7 @@ class Sheba implements Rule
 
             $tmpValue = (int) $tmpIBAN[0];
 
-            for ($i = 1, $iMax = strlen($tmpIBAN); $i < $iMax; $i++) {
+            for ($i = 1, $iMax = strlen($tmpIBAN); $i < $iMax; ++$i) {
                 $tmpValue *= 10;
 
                 $tmpValue += (int) $tmpIBAN[$i];

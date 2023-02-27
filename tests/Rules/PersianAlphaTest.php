@@ -6,25 +6,25 @@ use Iamfarhad\Validation\Rules\PersianAlpha;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
-class PersianAlphaTest extends TestCase
+final class PersianAlphaTest extends TestCase
 {
-    protected $rule;
+    private \Iamfarhad\Validation\Rules\PersianAlpha $persianAlpha;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->rule = new PersianAlpha();
+        $this->persianAlpha = new PersianAlpha();
     }
 
     public function test_valid_persian_alpha(): void
     {
-        $this->assertTrue($this->rule->passes('persian_alpha', 'سلام دینا'));
+        $this->assertTrue($this->persianAlpha->passes('persian_alpha', 'سلام دینا'));
     }
 
     public function test_invalid_persian_alpha(): void
     {
-        $this->assertFalse($this->rule->passes('persian_alpha', 'hello world'));
+        $this->assertFalse($this->persianAlpha->passes('persian_alpha', 'hello world'));
     }
 
     public function test_valid_persian_alpha_validator(): void
