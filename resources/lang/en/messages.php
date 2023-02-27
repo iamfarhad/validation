@@ -14,4 +14,5 @@ return [
     'address' => 'must be a correct address.',
     'postalCode' => 'must be a iran postal code.',
     'username' => 'invalid format.',
+    'base64' => 'invalid base64 format.',
 ];

@@ -66,6 +66,7 @@ You can access to validation rules by passing the rules key according blew follo
 | new Address()       | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters |
 | new PostalCode()    | Iran postal code                                                                                  |
 | new Username()      | Username format                                                                                   |
+| new Base64()        | Base64 format                                                                                     |
 
 ### Persian Alphabet
 Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
