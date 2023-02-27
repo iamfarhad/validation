@@ -2,6 +2,12 @@
 
 All notable changes to `iamfarhad/validation` will be documented in this file
 
+## v3.1.2 - 2023-02-27
+
+**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.1.1...v3.1.2
+
+- Added Base64 validation rule.
+
 ## v3.1.1 - 2023-02-27
 
 **Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.0.0...v3.1.1
