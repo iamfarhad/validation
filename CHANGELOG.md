@@ -2,6 +2,13 @@
 
 All notable changes to `iamfarhad/validation` will be documented in this file
 
+## v3.1.1 - 2023-02-27
+
+**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.0.0...v3.1.1
+
+- Remove support php 8.0
+- Fixed github test workflow
+
 ## v3.1.0 - 2023-02-27
 
 **Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.0.0...v3.1.0
