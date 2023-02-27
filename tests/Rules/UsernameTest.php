@@ -2,7 +2,6 @@
 
 namespace Iamfarhad\Validation\Tests\Rules;
 
-use Iamfarhad\Validation\Rules\Address;
 use Iamfarhad\Validation\Rules\Username;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;

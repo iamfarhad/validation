@@ -2,6 +2,14 @@
 
 All notable changes to `iamfarhad/validation` will be documented in this file
 
+## v3.1.0 - 2023-02-27
+
+**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.0.0...v3.1.0
+
+- Added Laravel Pint
+- Added PHP Rector
+- Added username validation
+
 ## v3.0.0 - 2023-02-21
 
 ### What's Changed

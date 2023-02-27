@@ -31,6 +31,7 @@ final class NationalCode implements Rule
         }
 
         $control = ($sub % 11) < 2 ? $sub % 11 : 11 - ($sub % 11);
+
         return $value[9] == $control;
     }
 
