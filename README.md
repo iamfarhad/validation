@@ -11,8 +11,8 @@ The Laravel Persian Validation package offers comprehensive validation for the P
 
 ## Requirement
 
-* Laravel 9.x | 10.x
-* PHP 8.1 | 8.2
+* Laravel 10.x | 11.x
+* PHP 8.1 | 8.2 | 8.3
 
 ## Install
 
