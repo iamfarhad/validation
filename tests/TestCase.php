@@ -5,7 +5,7 @@ namespace Iamfarhad\Validation\Tests;
 use Iamfarhad\Validation\ValidationRulesServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
-class TestCase extends Orchestra
+abstract class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
