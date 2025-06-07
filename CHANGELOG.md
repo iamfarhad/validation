@@ -2,6 +2,13 @@
 
 All notable changes to `iamfarhad/validation` will be documented in this file
 
+## v.3.3.0 - 2025-06-07
+
+**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.2.0...v.3.3.0
+
+Added support laravel 12
+Added support php 8.4
+
 ## v3.2.0 - 2024-05-12
 
 support laravel 11
