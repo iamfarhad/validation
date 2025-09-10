@@ -14,6 +14,7 @@ final class PersianNumber implements ValidationRule
     {
         if (! is_string($value) && ! is_numeric($value)) {
             $fail(__('validationRules::messages.persianNumber', ['attribute' => $attribute]));
+
             return;
         }
 

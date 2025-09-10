@@ -22,7 +22,7 @@ final class AddressTest extends TestCase
         foreach ($validAddresses as $address) {
             $validator = Validator::make(
                 ['address' => $address],
-                ['address' => [new Address()]]
+                ['address' => [new Address]]
             );
 
             $this->assertTrue($validator->passes(), "Address '{$address}' should be valid");
@@ -45,7 +45,7 @@ final class AddressTest extends TestCase
         // Since Address rule is very permissive, we'll test with a required field
         $validator = Validator::make(
             ['address' => ''],
-            ['address' => ['required', new Address()]]
+            ['address' => ['required', new Address]]
         );
 
         $this->assertFalse($validator->passes());

@@ -18,7 +18,7 @@ final class NationalCodeTest extends TestCase
         foreach ($validCodes as $code) {
             $validator = Validator::make(
                 ['national_code' => $code],
-                ['national_code' => [new NationalCode()]]
+                ['national_code' => [new NationalCode]]
             );
 
             $this->assertTrue($validator->passes(), "National code {$code} should be valid");
@@ -39,7 +39,7 @@ final class NationalCodeTest extends TestCase
         foreach ($invalidCodes as $code) {
             $validator = Validator::make(
                 ['national_code' => $code],
-                ['national_code' => [new NationalCode()]]
+                ['national_code' => [new NationalCode]]
             );
 
             $this->assertFalse($validator->passes(), "National code {$code} should be invalid");
@@ -50,7 +50,7 @@ final class NationalCodeTest extends TestCase
     {
         $validator = Validator::make(
             ['national_code' => '0112169229'],
-            ['national_code' => [new NationalCode()]]
+            ['national_code' => [new NationalCode]]
         );
 
         $this->assertFalse($validator->passes());

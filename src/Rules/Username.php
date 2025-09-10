@@ -14,6 +14,7 @@ final class Username implements ValidationRule
     {
         if (! is_string($value)) {
             $fail(__('validationRules::messages.username', ['attribute' => $attribute]));
+
             return;
         }
 

@@ -14,6 +14,7 @@ final class PostalCode implements ValidationRule
     {
         if (! is_string($value) && ! is_numeric($value)) {
             $fail(__('validationRules::messages.postalCode', ['attribute' => $attribute]));
+
             return;
         }
 

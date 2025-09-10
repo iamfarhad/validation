@@ -20,7 +20,7 @@ final class PersianNumberTest extends TestCase
         foreach ($validNumbers as $number) {
             $validator = Validator::make(
                 ['number' => $number],
-                ['number' => [new PersianNumber()]]
+                ['number' => [new PersianNumber]]
             );
 
             $this->assertTrue($validator->passes(), "Persian number '{$number}' should be valid");
@@ -40,7 +40,7 @@ final class PersianNumberTest extends TestCase
         foreach ($invalidNumbers as $number) {
             $validator = Validator::make(
                 ['number' => $number],
-                ['number' => [new PersianNumber()]]
+                ['number' => [new PersianNumber]]
             );
 
             $this->assertFalse($validator->passes(), "Number '{$number}' should be invalid");
@@ -51,7 +51,7 @@ final class PersianNumberTest extends TestCase
     {
         $validator = Validator::make(
             ['number' => '1234'],
-            ['number' => [new PersianNumber()]]
+            ['number' => [new PersianNumber]]
         );
 
         $this->assertFalse($validator->passes());

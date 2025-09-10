@@ -14,6 +14,7 @@ final class Mobile implements ValidationRule
     {
         if (! is_string($value) && ! is_numeric($value)) {
             $fail(__('validationRules::messages.mobile', ['attribute' => $attribute]));
+
             return;
         }
 

@@ -18,7 +18,7 @@ final class ShebaTest extends TestCase
         foreach ($validShebas as $sheba) {
             $validator = Validator::make(
                 ['sheba' => $sheba],
-                ['sheba' => [new Sheba()]]
+                ['sheba' => [new Sheba]]
             );
 
             $this->assertTrue($validator->passes(), "Sheba {$sheba} should be valid");
@@ -40,7 +40,7 @@ final class ShebaTest extends TestCase
         foreach ($invalidShebas as $sheba) {
             $validator = Validator::make(
                 ['sheba' => $sheba],
-                ['sheba' => [new Sheba()]]
+                ['sheba' => [new Sheba]]
             );
 
             $this->assertFalse($validator->passes(), "Sheba {$sheba} should be invalid");
@@ -51,7 +51,7 @@ final class ShebaTest extends TestCase
     {
         $validator = Validator::make(
             ['sheba' => 'IR930150000001351800087202'],
-            ['sheba' => [new Sheba()]]
+            ['sheba' => [new Sheba]]
         );
 
         $this->assertFalse($validator->passes());

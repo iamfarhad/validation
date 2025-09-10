@@ -9,7 +9,7 @@ final class ValidationRulesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../resources/lang' => app()->langPath() . '/vendor/validationRules',
+            __DIR__.'/../resources/lang' => app()->langPath().'/vendor/validationRules',
         ]);
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang/', 'validationRules');

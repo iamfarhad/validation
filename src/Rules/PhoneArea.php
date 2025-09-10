@@ -14,6 +14,7 @@ final class PhoneArea implements ValidationRule
     {
         if (! is_string($value) && ! is_numeric($value)) {
             $fail(__('validationRules::messages.phoneArea', ['attribute' => $attribute]));
+
             return;
         }
 

@@ -24,7 +24,7 @@ final class PhoneTest extends TestCase
         foreach ($validPhones as $phone) {
             $validator = Validator::make(
                 ['phone' => $phone],
-                ['phone' => [new Phone()]]
+                ['phone' => [new Phone]]
             );
 
             $this->assertTrue($validator->passes(), "Phone {$phone} should be valid");
@@ -46,7 +46,7 @@ final class PhoneTest extends TestCase
         foreach ($invalidPhones as $phone) {
             $validator = Validator::make(
                 ['phone' => $phone],
-                ['phone' => [new Phone()]]
+                ['phone' => [new Phone]]
             );
 
             $this->assertFalse($validator->passes(), "Phone {$phone} should be invalid");
@@ -57,7 +57,7 @@ final class PhoneTest extends TestCase
     {
         $validator = Validator::make(
             ['phone' => '12345678'],
-            ['phone' => [new Phone()]]
+            ['phone' => [new Phone]]
         );
 
         $this->assertFalse($validator->passes());

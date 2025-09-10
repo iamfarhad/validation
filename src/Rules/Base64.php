@@ -14,6 +14,7 @@ final class Base64 implements ValidationRule
     {
         if (! is_string($value)) {
             $fail(__('validationRules::messages.base64', ['attribute' => $attribute]));
+
             return;
         }
 

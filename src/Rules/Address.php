@@ -14,6 +14,7 @@ final class Address implements ValidationRule
     {
         if (! is_string($value)) {
             $fail(__('validationRules::messages.address', ['attribute' => $attribute]));
+
             return;
         }
 

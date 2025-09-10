@@ -14,6 +14,7 @@ final class PersianAlpha implements ValidationRule
     {
         if (! is_string($value)) {
             $fail(__('validationRules::messages.persianAlpha', ['attribute' => $attribute]));
+
             return;
         }
 

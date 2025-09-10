@@ -23,7 +23,7 @@ final class UsernameTest extends TestCase
         foreach ($validUsernames as $username) {
             $validator = Validator::make(
                 ['username' => $username],
-                ['username' => [new Username()]]
+                ['username' => [new Username]]
             );
 
             $this->assertTrue($validator->passes(), "Username '{$username}' should be valid");
@@ -44,7 +44,7 @@ final class UsernameTest extends TestCase
         foreach ($invalidUsernames as $username) {
             $validator = Validator::make(
                 ['username' => $username],
-                ['username' => [new Username()]]
+                ['username' => [new Username]]
             );
 
             $this->assertFalse($validator->passes(), "Username '{$username}' should be invalid");
@@ -55,7 +55,7 @@ final class UsernameTest extends TestCase
     {
         $validator = Validator::make(
             ['username' => '123user'],
-            ['username' => [new Username()]]
+            ['username' => [new Username]]
         );
 
         $this->assertFalse($validator->passes());

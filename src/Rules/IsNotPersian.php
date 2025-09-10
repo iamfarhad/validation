@@ -14,6 +14,7 @@ final class IsNotPersian implements ValidationRule
     {
         if (! is_string($value)) {
             $fail(__('validationRules::messages.isNotPersian', ['attribute' => $attribute]));
+
             return;
         }
 

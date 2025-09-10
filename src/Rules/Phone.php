@@ -14,6 +14,7 @@ final class Phone implements ValidationRule
     {
         if (! is_string($value) && ! is_numeric($value)) {
             $fail(__('validationRules::messages.phone', ['attribute' => $attribute]));
+
             return;
         }
 
