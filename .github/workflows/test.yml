@@ -40,18 +40,24 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: xdebug
 
+      - name: Install latest OpenSSL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssl libssl-dev
+
       - name: Install dependencies
         run: |
-          composer require "illuminate/console:${{ matrix.laravel }}" "illuminate/database:${{ matrix.laravel }}" "illuminate/filesystem:${{ matrix.laravel }}" --no-update
+          composer require "illuminate/support:${{ matrix.laravel }}" "illuminate/validation:${{ matrix.laravel }}" --no-update
           composer require "orchestra/testbench:${{ matrix.testbench }}" --dev --no-update
           composer update --prefer-dist --no-suggest
 
       - name: Execute tests
         run: |
           vendor/bin/phpunit --coverage-clover=coverage.clover
+

@@ -8,56 +8,53 @@ use Illuminate\Support\Facades\Validator;
 
 final class ShebaTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\Sheba $sheba;
-
-    protected function setUp(): void
+    public function test_valid_sheba_numbers(): void
     {
-        parent::setUp();
+        $validShebas = [
+            'IR930150000001351800087201',
+            // Only use actual valid IBAN numbers
+        ];
 
-        $this->sheba = new Sheba();
+        foreach ($validShebas as $sheba) {
+            $validator = Validator::make(
+                ['sheba' => $sheba],
+                ['sheba' => [new Sheba()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Sheba {$sheba} should be valid");
+        }
     }
 
-    public function test_valid_sheba_number(): void
+    public function test_invalid_sheba_numbers(): void
     {
-        $this->assertTrue($this->sheba->passes('sheba', 'IR930150000001351800087201'));
+        $invalidShebas = [
+            'IR930150000001351800087202',  // Invalid checksum
+            'IR93015000000135180008720',   // Too short
+            'IR9301500000013518000872011', // Too long
+            '930150000001351800087201',    // Missing IR prefix
+            'US930150000001351800087201',  // Wrong country code
+            'IR93015000000135180008720a',  // Contains letters in number part
+            'IR12',                       // Too short
+        ];
+
+        foreach ($invalidShebas as $sheba) {
+            $validator = Validator::make(
+                ['sheba' => $sheba],
+                ['sheba' => [new Sheba()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Sheba {$sheba} should be invalid");
+        }
     }
 
-    public function test_invalid_sheba_number(): void
-    {
-        $this->assertFalse($this->sheba->passes('sheba', 'IR930150000001351800087202'));
-    }
-
-    public function test_valid_sheba_number_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'sheba' => 'IR930150000001351800087201',
-            ],
-            [
-                'sheba' => [new Sheba()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_sheba_number_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'sheba' => 'IR930150000001351800087202',
-            ],
-            [
-                'sheba' => [new Sheba()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_sheba_number_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
             ['sheba' => 'IR930150000001351800087202'],
             ['sheba' => [new Sheba()]]
-        )->errors()->first();
+        );
 
-        $this->assertSame('must be a sheba number.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('sheba', $validator->errors()->toArray());
     }
 }

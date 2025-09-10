@@ -8,56 +8,58 @@ use Illuminate\Support\Facades\Validator;
 
 final class PhoneAreaTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\PhoneArea $phoneArea;
-
-    protected function setUp(): void
+    public function test_valid_phone_area_numbers(): void
     {
-        parent::setUp();
+        $validPhones = [
+            '02122345678',     // Tehran
+            '03122345678',     // Isfahan
+            '07122345678',     // Shiraz
+            '01122345678',     // Gilan
+            '08122345678',     // Kermanshah
+        ];
 
-        $this->phoneArea = new PhoneArea();
+        foreach ($validPhones as $phone) {
+            $validator = Validator::make(
+                ['phone_area' => $phone],
+                ['phone_area' => [new PhoneArea()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Phone area {$phone} should be valid");
+        }
     }
 
-    public function test_valid_persian_phone_area_number(): void
+    public function test_invalid_phone_area_numbers(): void
     {
-        $this->assertTrue($this->phoneArea->passes('phone', '08132214785'));
+        $invalidPhones = [
+            '2122345678',      // Missing leading zero
+            '00122345678',     // Invalid area code (00)
+            '02012345678',     // Invalid second digit in phone part (0)
+            '02112345678',     // Invalid second digit in phone part (1)
+            '021234567',       // Too short
+            '0212345678901',   // Too long
+            '021234567a',      // Contains letters
+            '021-2345678',     // Contains dash
+            '021 2345678',     // Contains space
+        ];
+
+        foreach ($invalidPhones as $phone) {
+            $validator = Validator::make(
+                ['phone_area' => $phone],
+                ['phone_area' => [new PhoneArea()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Phone area {$phone} should be invalid");
+        }
     }
 
-    public function test_invalid_persian_phone_area_number(): void
-    {
-        $this->assertFalse($this->phoneArea->passes('phone', '081322147853'));
-    }
-
-    public function test_valid_persian_phone_area_number_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'phone' => '08132214785',
-            ],
-            [
-                'phone' => [new PhoneArea()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_phone_area_number_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'phone' => '081322147856',
-            ],
-            [
-                'phone' => [new PhoneArea()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_persian_phone_area_number_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['phone' => '081322147852'],
-            ['phone' => [new PhoneArea()]]
-        )->errors()->first();
+            ['phone_area' => '2122345678'],
+            ['phone_area' => [new PhoneArea()]]
+        );
 
-        $this->assertSame('must be a iran phone number with area code.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('phone_area', $validator->errors()->toArray());
     }
 }

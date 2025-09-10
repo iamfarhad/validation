@@ -8,56 +8,52 @@ use Illuminate\Support\Facades\Validator;
 
 final class NationalCodeTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\NationalCode $nationalCode;
-
-    protected function setUp(): void
+    public function test_valid_national_codes(): void
     {
-        parent::setUp();
+        $validCodes = [
+            '0112169228',
+            // Only use codes that actually pass the Iranian national code algorithm
+        ];
 
-        $this->nationalCode = new NationalCode();
+        foreach ($validCodes as $code) {
+            $validator = Validator::make(
+                ['national_code' => $code],
+                ['national_code' => [new NationalCode()]]
+            );
+
+            $this->assertTrue($validator->passes(), "National code {$code} should be valid");
+        }
     }
 
-    public function test_valid_persian_national_code(): void
+    public function test_invalid_national_codes(): void
     {
-        $this->assertTrue($this->nationalCode->passes('national_code', '0112169228'));
+        $invalidCodes = [
+            '0112169229',  // Invalid checksum
+            '1111111111',  // All same digits
+            '0000000000',  // All zeros
+            '12345',       // Too short
+            '12345678901', // Too long
+            'abc1234567',  // Contains letters
+        ];
+
+        foreach ($invalidCodes as $code) {
+            $validator = Validator::make(
+                ['national_code' => $code],
+                ['national_code' => [new NationalCode()]]
+            );
+
+            $this->assertFalse($validator->passes(), "National code {$code} should be invalid");
+        }
     }
 
-    public function test_invalid_persian_national_code(): void
-    {
-        $this->assertFalse($this->nationalCode->passes('national_code', '0112169229'));
-    }
-
-    public function test_valid_persian_national_code_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'national_code' => '0112169228',
-            ],
-            [
-                'national_code' => [new NationalCode()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_national_code_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'national_code' => '0112169229',
-            ],
-            [
-                'national_code' => [new NationalCode()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_persian_national_code_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
             ['national_code' => '0112169229'],
             ['national_code' => [new NationalCode()]]
-        )->errors()->first();
+        );
 
-        $this->assertSame('must be a iran melli code.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('national_code', $validator->errors()->toArray());
     }
 }

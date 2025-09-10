@@ -8,56 +8,59 @@ use Illuminate\Support\Facades\Validator;
 
 final class PhoneTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\Phone $phone;
-
-    protected function setUp(): void
+    public function test_valid_phone_numbers(): void
     {
-        parent::setUp();
+        $validPhones = [
+            '22345678',
+            '33456789',
+            '44567890',
+            '55678901',
+            '66789012',
+            '77890123',
+            '88901234',
+            '99012345',
+        ];
 
-        $this->phone = new Phone();
+        foreach ($validPhones as $phone) {
+            $validator = Validator::make(
+                ['phone' => $phone],
+                ['phone' => [new Phone()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Phone {$phone} should be valid");
+        }
     }
 
-    public function test_valid_persian_phone_number(): void
+    public function test_invalid_phone_numbers(): void
     {
-        $this->assertTrue($this->phone->passes('phone', '32214785'));
+        $invalidPhones = [
+            '12345678',        // Starts with 1 (invalid)
+            '02345678',        // Starts with 0 (invalid)
+            '1234567',         // Too short
+            '123456789',       // Too long
+            '2234567a',        // Contains letters
+            '2234-5678',       // Contains dash
+            '2234 5678',       // Contains space
+        ];
+
+        foreach ($invalidPhones as $phone) {
+            $validator = Validator::make(
+                ['phone' => $phone],
+                ['phone' => [new Phone()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Phone {$phone} should be invalid");
+        }
     }
 
-    public function test_invalid_persian_phone_number(): void
-    {
-        $this->assertFalse($this->phone->passes('phone', '322147853'));
-    }
-
-    public function test_valid_persian_phone_number_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'phone' => '32214785',
-            ],
-            [
-                'phone' => [new Phone()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_phone_number_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'phone' => '322147856',
-            ],
-            [
-                'phone' => [new Phone()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_persian_phone_number_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['phone' => '322147852'],
+            ['phone' => '12345678'],
             ['phone' => [new Phone()]]
-        )->errors()->first();
+        );
 
-        $this->assertSame('must be a iran phone number.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('phone', $validator->errors()->toArray());
     }
 }

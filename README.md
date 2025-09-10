@@ -1,171 +1,293 @@
 [![Latest Stable Version](https://poser.pugx.org/iamfarhad/validation/v/stable)](https://packagist.org/packages/iamfarhad/validation)
 [![License](https://poser.pugx.org/iamfarhad/validation/license)](https://packagist.org/packages/iamfarhad/validation)
 [![Total Downloads](https://poser.pugx.org/iamfarhad/validation/downloads)](https://packagist.org/packages/iamfarhad/validation)
+[![Tests](https://github.com/iamfarhad/validation/workflows/run-tests/badge.svg)](https://github.com/iamfarhad/validation/actions)
 
 # Laravel Persian Validation
 
-The Laravel Persian Validation package offers comprehensive validation for the Persian language, including validation for Persian alphabets, numbers, and other Persian-specific elements. This package allows developers to ensure that their Persian language input data meets the necessary validation criteria, enhancing the reliability and accuracy of their applications. With Laravel Persian Validation, developers can easily incorporate Persian language validation into their Laravel projects, providing a more inclusive and user-friendly experience for Persian-speaking users.
+A comprehensive Laravel validation package for Persian (Farsi) language and Iranian-specific data validation. This package provides a complete set of validation rules for Persian text, Iranian national codes, mobile numbers, bank account numbers (Sheba), postal codes, and more.
 
+## ✨ Features
 
+- **🔤 Persian Text Validation**: Persian alphabet and number validation
+- **📱 Iranian Mobile Numbers**: Complete validation for all Iranian mobile operators
+- **🏦 Banking**: Sheba (IBAN) validation for Iranian banks
+- **🆔 National Code**: Iranian national identification code validation
+- **📮 Postal Code**: Iranian postal code format validation
+- **📞 Phone Numbers**: Landline and area code validation
+- **💳 Payment Cards**: Credit/debit card number validation with Luhn algorithm
+- **👤 Username**: Standard username format validation
+- **🔐 Base64**: Base64 string format validation
+- **🏠 Address**: Multi-language address validation
 
+## 📋 Requirements
 
-## Requirement
+- **PHP**: 8.1, 8.2, 8.3, 8.4
+- **Laravel**: 10.x, 11.x, 12.x
+- **PHPUnit**: 10.x, 11.x, 12.x (for testing)
 
-* Laravel 10.x | 11.x | 12.x
-* PHP 8.1 | 8.2 | 8.3 | 8.4
+## 📦 Installation
 
-## Install
-
-Via Composer
-
-``` bash
-$ composer require iamfarhad/validation
-```
-
-This package is designed to automatically register itself without requiring any additional configuration.
-
-
-### Translations
-
-If you would like to customize the translations for the Laravel Persian Validation package, you can use the following command to publish them into your project's resources/lang directory:
+Install the package via Composer:
 
 ```bash
-php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationRulesServiceProvider" --tag="translations"
-
+composer require iamfarhad/validation
 ```
-If you are using Laravel 9.x or later, the translations will be published to the /lang directory instead. Once the translations are published, you can modify them as needed to suit your project's requirements.
 
+The package will automatically register itself with Laravel's service container.
+
+## 🚀 Usage
+
+All validation rules implement Laravel's modern `ValidationRule` interface and can be used directly in your validation arrays:
+
+### Basic Usage
+
+```php
+use Illuminate\Support\Facades\Validator;
+use Iamfarhad\Validation\Rules\NationalCode;
+
+$validator = Validator::make($request->all(), [
+    'national_code' => ['required', new NationalCode()],
+]);
+```
+
+### In Form Requests
+
+```php
+use Iamfarhad\Validation\Rules\Mobile;
+use Iamfarhad\Validation\Rules\NationalCode;
+
+public function rules(): array
+{
+    return [
+        'name' => ['required', 'string'],
+        'national_code' => ['required', new NationalCode()],
+        'mobile' => ['required', new Mobile()],
+    ];
+}
+```
+
+## 📚 Available Validation Rules
+
+| Rule | Description | Example |
+|------|-------------|---------|
+| `NationalCode` | Iranian national identification code | `0112169228` |
+| `Mobile` | Iranian mobile phone numbers | `09123456789` |
+| `Sheba` | Iranian bank account numbers (IBAN) | `IR930150000001351800087201` |
+| `PersianAlpha` | Persian alphabet characters only | `فارسی` |
+| `PersianNumber` | Persian numeric characters | `۱۲۳۴۵۶۷۸۹۰` |
+| `Phone` | Iranian landline phone numbers | `22345678` |
+| `PhoneArea` | Phone numbers with area codes | `02122345678` |
+| `PostalCode` | Iranian postal codes | `1234567890` |
+| `CardNumber` | Payment card numbers (Luhn) | `4532015112830366` |
+| `Address` | Multi-language addresses | `تهران، خیابان آزادی` |
+| `Username` | Standard username format | `user_name123` |
+| `Base64` | Base64 encoded strings | `SGVsbG8gV29ybGQ=` |
+| `IsNotPersian` | Text without Persian characters | `Hello World` |
+
+## 🔍 Detailed Examples
+
+### Persian Text Validation
+
+```php
+use Iamfarhad\Validation\Rules\PersianAlpha;
+use Iamfarhad\Validation\Rules\PersianNumber;
+
+// Persian alphabet only
+Validator::make(['name' => 'فارسی'], [
+    'name' => [new PersianAlpha()]
+]);
+
+// Persian numbers only
+Validator::make(['number' => '۱۲۳۴۵'], [
+    'number' => [new PersianNumber()]
+]);
+```
+
+### Iranian Mobile Numbers
+
+```php
+use Iamfarhad\Validation\Rules\Mobile;
+
+// Supports all Iranian operators (Irancell, Rightel, Hamrah-e Avval, etc.)
+Validator::make(['mobile' => '09123456789'], [
+    'mobile' => [new Mobile()]
+]);
+```
+
+### National Code Validation
+
+```php
+use Iamfarhad\Validation\Rules\NationalCode;
+
+// Validates Iranian national identification codes
+Validator::make(['national_code' => '0112169228'], [
+    'national_code' => [new NationalCode()]
+]);
+```
+
+### Banking (Sheba) Validation
+
+```php
+use Iamfarhad\Validation\Rules\Sheba;
+
+// Iranian bank account numbers (IBAN format)
+Validator::make(['account' => 'IR930150000001351800087201'], [
+    'account' => [new Sheba()]
+]);
+```
+
+### Phone Numbers
+
+```php
+use Iamfarhad\Validation\Rules\Phone;
+use Iamfarhad\Validation\Rules\PhoneArea;
+
+// Landline numbers
+Validator::make(['phone' => '22345678'], [
+    'phone' => [new Phone()]
+]);
+
+// With area code
+Validator::make(['phone_area' => '02122345678'], [
+    'phone_area' => [new PhoneArea()]
+]);
+```
+
+### Payment Cards
+
+```php
+use Iamfarhad\Validation\Rules\CardNumber;
+
+// Validates using Luhn algorithm
+Validator::make(['card' => '4532015112830366'], [
+    'card' => [new CardNumber()]
+]);
+```
+
+### Multiple Rules
+
+```php
+use Iamfarhad\Validation\Rules\{Mobile, NationalCode, PersianAlpha};
+
+$validator = Validator::make($request->all(), [
+    'first_name' => ['required', new PersianAlpha()],
+    'last_name' => ['required', new PersianAlpha()],
+    'national_code' => ['required', new NationalCode()],
+    'mobile' => ['required', new Mobile()],
+]);
+
+if ($validator->fails()) {
+    return back()->withErrors($validator)->withInput();
+}
+```
+
+## 🌐 Translations
+
+Publish the language files to customize error messages:
 
 ```bash
 php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationRulesServiceProvider"
 ```
 
-## Testing
-You can run the tests with:
+This will publish translation files to `lang/vendor/validationRules/` directory where you can customize the error messages for each validation rule.
+
+### Available Languages
+
+- **English** (`en/messages.php`)
+- **Persian/Farsi** (`fa/messages.php`)
+
+## 🧪 Testing
+
+Run the test suite:
 
 ```bash
+# Run all tests
+composer test
+
+# Run tests with coverage
+composer test-coverage
+
+# Run static analysis
+composer analyse
+
+# Run code formatting
+composer format
+
+# Run all checks (format, analyse, test)
+composer ci
+```
+
+## 🏗️ Development
+
+### Requirements for Development
+
+- PHP 8.1+
+- Composer
+- Laravel 10+
+
+### Setup
+
+```bash
+git clone https://github.com/iamfarhad/validation.git
+cd validation
+composer install
 composer test
 ```
 
-## Usage
+### Code Quality
 
-You can access to validation rules by passing the rules key according blew following table:
+This package follows strict code quality standards:
 
-| Rules               | Descriptions                                                                                      |
-|---------------------|---------------------------------------------------------------------------------------------------|
-| new PersianAlpha()  | Persian alphabet                                                                                  |
-| new PersianNumber() | Persian numbers                                                                                   |
-| new Mobile()        | Iran mobile numbers                                                                               |
-| new Sheba()         | Iran Sheba numbers                                                                                |
-| new NationalCode()  | Iran melli code                                                                                   |
-| new IsNotPersian()  | Doesn't accept Persian alphabet and numbers                                                       |
-| new Mobile()        | Iran mobile numbers                                                                               |
-| new Phone()         | Iran phone numbers                                                                                |
-| new PhoneArea()     | Iran phone numbers with area code                                                                 |
-| new CardNumber()    | Payment card numbers                                                                              |
-| new Address()       | Accept Persian, English and ... alphabet, Persian and English numbers and some special characters |
-| new PostalCode()    | Iran postal code                                                                                  |
-| new Username()      | Username format                                                                                   |
-| new Base64()        | Base64 format                                                                                     |
+- **PHPStan Level 8** static analysis
+- **Laravel Pint** code formatting (Laravel preset)
+- **PHPUnit 10+** for testing
+- **GitHub Actions** for CI/CD
 
-### Persian Alphabet
-Accept Persian language alphabet according to standard Persian, this is the way you can use this validation rule:
+## 🤝 Contributing
 
-``` php
-Validator::make(
-    ['name' => 'فارسی'],
-    ['name' => [new PersianAlpha()]
-);
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+### Guidelines
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Write** tests for your changes
+4. **Ensure** all tests pass (`composer ci`)
+5. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+6. **Push** to the branch (`git push origin feature/amazing-feature`)
+7. **Open** a Pull Request
+
+### Running Tests
+
+```bash
+# Install dependencies
+composer install
+
+# Run the full test suite
+composer ci
 ```
 
-### Persian numbers
-Validate Persian standard numbers (۰۱۲۳۴۵۶۷۸۹):
+## 📄 License
 
-``` php
-Validator::make(
-    ['num' => '۰۱۲۳۴۵۶۷۸۹'],
-    ['num' => [new PersianNumber()]
-);
-```
+This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-### Iran mobile phone
-Validate Iran mobile phones (irancel, rightel, hamrah-e-aval, ...):
+## 👨‍💻 Author
 
-``` php
-Validator::make(
-    ['mob' => '09127777777'],
-    ['mob' => [new Mobile()]
-);
-```
+**Farhad Zand**
+- GitHub: [@iamfarhad](https://github.com/iamfarhad)
+- Email: farhad.pd@gmail.com
 
-### Sheba number
-Validate Iran bank sheba numbers:
+## 🙏 Support
 
-``` php
-Validator::make(
-    ['sheba_number' => 'IR062960000000100324200001'],
-    ['sheba_number' => [new Sheba()]
-);
-```
+If you find this package helpful, please consider:
 
-### Iran national code
-Validate Iran national code (melli-code):
+- ⭐ **Starring** the repository
+- 🐛 **Reporting** issues
+- 💡 **Suggesting** new features
+- 🔀 **Contributing** code improvements
+- 📢 **Sharing** with the community
 
-``` php
-Validator::make(
-    ['codeMelli' => '3240175800'],
-    ['codeMelli' => [new NationalCode()]
-);
-```
+---
 
-### Payment card number
-Validate Iran payment card numbers:
-
-``` php
-Validator::make(
-    ['card' => '6274129005473742'],
-    ['card' => [new CardNumber()]
-);
-```
-
-### Iran postal code
-Validate Iran postal code:
-
-``` php
-Validator::make(
-    ['postal' => '16719735744'],
-    ['postal' => [new PostalCode()]
-);
-```
-
-```php
-// in a `FormRequest`
-
-public function rules()
-{
-    return [
-        'NationalCode' => ['required', new NationalCode()],
-    ];
-}
-```
-
-## Team
-This component is developed by the following person(s)
-
-| [![Farhad Zand](https://avatars3.githubusercontent.com/u/1936147?v=3&s=130)](https://github.com/iamfarhad) |
-|------------------------------------------------------------------------------------------------------------|
-| [Farhad Zand](https://github.com/iamfarhad)                                                                |
-
-## Support This Project
-
-Great! It's always helpful to have more contributors to a package. Here are a few ways you can contribute to the package completion:
-
-* Report Issues: If you find any bugs or issues with the package, you can report them on the package's GitHub repository. Be sure to provide detailed steps to reproduce the issue and any relevant code snippets.
-* Submit Pull Requests: If you have a fix for a bug or an improvement to the package, you can submit a pull request on the package's GitHub repository. Be sure to follow the guidelines for contributing and to test your changes thoroughly.
-* Improve Documentation: If you find any gaps in the package's documentation, you can contribute by improving the existing documentation or adding new documentation. You can do this by submitting a pull request on the package's GitHub repository.
-* Spread the Word: You can help the package by spreading the word about it on social media, developer forums, and other channels. This can help attract more contributors and users to the package.
-
-Remember that contributing to open-source projects like this package is a collaborative effort, and every little bit helps. Thank you for considering contributing!
-## License
-
-The Laravel persian validation Module is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Made with ❤️ for the Laravel and Persian developer community.

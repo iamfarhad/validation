@@ -1,6 +1,7 @@
 {
     "name": "iamfarhad/validation",
-    "description": "laravel persian validation package",
+    "description": "Laravel persian validation package with comprehensive validation rules for Iranian-specific data",
+    "type": "library",
     "license": "MIT",
     "keywords": [
         "laravel",
@@ -12,18 +13,25 @@
         "lumen",
         "custom",
         "rule",
-        "lumen"
+        "national-code",
+        "mobile",
+        "sheba",
+        "postal-code",
+        "card-number"
     ],
+    "homepage": "https://github.com/iamfarhad/validation",
+    "support": {
+        "issues": "https://github.com/iamfarhad/validation/issues",
+        "source": "https://github.com/iamfarhad/validation",
+        "docs": "https://github.com/iamfarhad/validation#readme"
+    },
     "authors": [
         {
             "name": "Farhad Zand",
-            "email": "farhad.pd@gmail.com"
+            "email": "farhad.pd@gmail.com",
+            "role": "Developer"
         }
     ],
-    "require": {
-        "php": "^8.1",
-        "illuminate/support": "^10.0|^11.0|^12.0"
-    },
     "autoload": {
         "psr-4": {
             "Iamfarhad\\Validation\\": "src/"
@@ -34,11 +42,28 @@
             "Iamfarhad\\Validation\\Tests\\": "tests/"
         }
     },
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/validation": "^10.0|^11.0|^12.0"
+    },
     "require-dev": {
-        "laravel/pint": "^1.6",
-        "rector/rector": "^0.19.2",
-        "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
-        "phpunit/phpunit": "^9.4|^10.1|^11.0"
+        "phpunit/phpunit": "^10.0|^11.0|^12.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "mockery/mockery": "^1.0|^2.0",
+        "phpstan/phpstan": "^1.10",
+        "laravel/pint": "^1.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/pint",
+        "ci": [
+            "@format",
+            "@analyse",
+            "@test"
+        ]
     },
     "extra": {
         "laravel": {
@@ -47,13 +72,11 @@
             ]
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-    },
     "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

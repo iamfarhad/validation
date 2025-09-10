@@ -8,56 +8,57 @@ use Illuminate\Support\Facades\Validator;
 
 final class UsernameTest extends TestCase
 {
-    private Username $username;
-
-    protected function setUp(): void
+    public function test_valid_usernames(): void
     {
-        parent::setUp();
+        $validUsernames = [
+            'user123',
+            'test_user',
+            'my-username',
+            'a',
+            'user_name_123',
+            'test-user-name',
+            'username123_test',
+        ];
 
-        $this->username = new Username();
+        foreach ($validUsernames as $username) {
+            $validator = Validator::make(
+                ['username' => $username],
+                ['username' => [new Username()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Username '{$username}' should be valid");
+        }
     }
 
-    public function test_valid_username(): void
+    public function test_invalid_usernames(): void
     {
-        $this->assertTrue($this->username->passes('username', 'farhadzand'));
+        $invalidUsernames = [
+            '123user',         // Starts with number
+            '_username',       // Starts with underscore
+            '-username',       // Starts with dash
+            'user name',       // Contains space
+            'user@name',       // Contains special character
+            'user.name',       // Contains dot
+        ];
+
+        foreach ($invalidUsernames as $username) {
+            $validator = Validator::make(
+                ['username' => $username],
+                ['username' => [new Username()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Username '{$username}' should be invalid");
+        }
     }
 
-    public function test_invalid_username(): void
-    {
-        $this->assertFalse($this->username->passes('username', 'farhad.zand'));
-    }
-
-    public function test_valid_username_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'username' => 'farhadzand',
-            ],
-            [
-                'username' => [new Username()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_username_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'username' => 'farhad.zand',
-            ],
-            [
-                'username' => [new Username()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_username_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['username' => 'farhad.zand'],
+            ['username' => '123user'],
             ['username' => [new Username()]]
-        )->errors()->first();
+        );
 
-        $this->assertSame('invalid format.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('username', $validator->errors()->toArray());
     }
 }

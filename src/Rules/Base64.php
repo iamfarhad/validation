@@ -2,23 +2,23 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-final class Base64 implements Rule
+final class Base64 implements ValidationRule
 {
-    private ?string $attribute = null;
-
-    public function passes($attribute, $value): bool
+    /**
+     * Run the validation rule.
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->attribute = $attribute;
+        if (! is_string($value)) {
+            $fail(__('validationRules::messages.base64', ['attribute' => $attribute]));
+            return;
+        }
 
-        return base64_encode(base64_decode($value, true)) === $value;
-    }
-
-    public function message(): string
-    {
-        return __('validationRules::messages.base64', [
-            'attribute' => $this->attribute,
-        ]);
+        if (base64_encode(base64_decode($value, true)) !== $value) {
+            $fail(__('validationRules::messages.base64', ['attribute' => $attribute]));
+        }
     }
 }

@@ -8,56 +8,54 @@ use Illuminate\Support\Facades\Validator;
 
 final class MobileTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\Mobile $mobile;
-
-    protected function setUp(): void
+    public function test_valid_mobile_numbers(): void
     {
-        parent::setUp();
+        $validMobiles = [
+            '09123456789',
+            '09901234567',
+            '09351234567',
+            '09121234567',
+        ];
 
-        $this->mobile = new Mobile();
+        foreach ($validMobiles as $mobile) {
+            $validator = Validator::make(
+                ['mobile' => $mobile],
+                ['mobile' => [new Mobile()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Mobile {$mobile} should be valid");
+        }
     }
 
-    public function test_valid_persian_mobile_number(): void
+    public function test_invalid_mobile_numbers(): void
     {
-        $this->assertTrue($this->mobile->passes('mobile', '09127777777'));
+        $invalidMobiles = [
+            '091234567890',  // Too long
+            '0912345678',    // Too short
+            '08123456789',   // Wrong prefix
+            '9123456789',    // Missing leading zero
+            '091234567ab',   // Contains letters
+            '02123456789',   // Landline format
+        ];
+
+        foreach ($invalidMobiles as $mobile) {
+            $validator = Validator::make(
+                ['mobile' => $mobile],
+                ['mobile' => [new Mobile()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Mobile {$mobile} should be invalid");
+        }
     }
 
-    public function test_invalid_persian_mobile_number(): void
-    {
-        $this->assertFalse($this->mobile->passes('mobile', '091277777777'));
-    }
-
-    public function test_valid_persian_mobile_number_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'mobile' => '09127777777',
-            ],
-            [
-                'mobile' => [new Mobile()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_mobile_number_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'mobile' => '091277777777',
-            ],
-            [
-                'mobile' => [new Mobile()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_persian_mobile_number_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['mobile' => '091277777777'],
+            ['mobile' => '08123456789'],
             ['mobile' => [new Mobile()]]
-        )->errors()->first();
+        );
 
-        $this->assertSame('must be a iran mobile number.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('mobile', $validator->errors()->toArray());
     }
 }

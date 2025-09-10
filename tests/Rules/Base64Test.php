@@ -3,62 +3,58 @@
 namespace Iamfarhad\Validation\Tests\Rules;
 
 use Iamfarhad\Validation\Rules\Base64;
-use Iamfarhad\Validation\Rules\Username;
 use Iamfarhad\Validation\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
 final class Base64Test extends TestCase
 {
-    private Username $username;
-
-    protected function setUp(): void
+    public function test_valid_base64_strings(): void
     {
-        parent::setUp();
+        $validBase64 = [
+            'SGVsbG8gV29ybGQ=',      // "Hello World"
+            'VGVzdCBzdHJpbmc=',      // "Test string"
+            'MTIzNDU2Nzg5MA==',      // "1234567890"
+            'YWJjZGVmZ2hpams=',      // "abcdefghijk"
+        ];
 
-        $this->base64 = new Base64();
+        foreach ($validBase64 as $base64) {
+            $validator = Validator::make(
+                ['data' => $base64],
+                ['data' => [new Base64()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Base64 string {$base64} should be valid");
+        }
     }
 
-    public function test_valid_base64(): void
+    public function test_invalid_base64_strings(): void
     {
-        $this->assertTrue($this->base64->passes('base64', 'ZmFyaGFkemFuZA=='));
+        $invalidBase64 = [
+            'Hello World',           // Plain text
+            'SGVsbG8gV29ybGQ',       // Missing padding
+            'SGVsbG8gV29ybGQ===',    // Too much padding
+            'SGVsbG8@V29ybGQ=',      // Invalid character (@)
+            'SGVsbG8 V29ybGQ=',      // Contains space
+        ];
+
+        foreach ($invalidBase64 as $base64) {
+            $validator = Validator::make(
+                ['data' => $base64],
+                ['data' => [new Base64()]]
+            );
+
+            $this->assertFalse($validator->passes(), "String {$base64} should be invalid base64");
+        }
     }
 
-    public function test_invalid_base64(): void
-    {
-        $this->assertFalse($this->base64->passes('base64', 'ZmFyaGFkemFuZ'));
-    }
-
-    public function test_valid_base64_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'base64' => 'ZmFyaGFkemFuZA==',
-            ],
-            [
-                'base64' => [new Base64()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_base64_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'base64' => 'ZmFyaGFkemFuZ',
-            ],
-            [
-                'base64' => [new Base64()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_base64_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['base64' => 'ZmFyaGFkemFuZ'],
-            ['base64' => [new Base64()]]
-        )->errors()->first();
+            ['data' => 'Hello World'],
+            ['data' => [new Base64()]]
+        );
 
-        $this->assertSame('invalid base64 format.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('data', $validator->errors()->toArray());
     }
 }

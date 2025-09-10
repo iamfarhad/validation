@@ -1,0 +1,30 @@
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests
+    
+    # Ignore common Laravel/testing patterns
+    ignoreErrors:
+        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$[a-zA-Z0-9_]+#'
+        - '#Cannot access offset .+ on Illuminate\\Contracts\\Foundation\\Application#'
+        - '#Cannot call method .+ on Illuminate\\Foundation\\Application\|null#'
+        - '#Offset .+ does not exist on Illuminate\\Foundation\\Application\|null#'
+        - '#Parameter .+ expects .+, Illuminate\\Foundation\\Application\|null given#'
+        - '#Dead catch - Throwable is never thrown in the try block#'
+        - '#Unreachable statement - code above always terminates#'
+        - '#Cannot call method .+ on class-string\|object#'
+        - '#Possibly invalid array key type#'
+        - '#Negated boolean expression is always true#'
+        -
+            identifier: missingType.iterableValue
+        
+    # Bootstrap for Laravel
+    bootstrapFiles:
+        - vendor/autoload.php
+    
+    # Exclude vendor and build directories
+    excludePaths:
+        - vendor/*
+        - build/*
+

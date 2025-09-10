@@ -2,26 +2,23 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-final class Username implements Rule
+final class Username implements ValidationRule
 {
-    private string $attribute;
-
-    public function passes($attribute, $value): bool
+    /**
+     * Run the validation rule.
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->attribute = $attribute;
+        if (! is_string($value)) {
+            $fail(__('validationRules::messages.username', ['attribute' => $attribute]));
+            return;
+        }
 
-        return preg_match(
-            "#^[a-z][a-z0-9]*(?:[_\-][a-z0-9]+)*$#i",
-            $value
-        );
-    }
-
-    public function message(): string
-    {
-        return __('validationRules::messages.username', [
-            'attribute' => $this->attribute,
-        ]);
+        if (! preg_match("#^[a-z][a-z0-9]*(?:[_\-][a-z0-9]+)*$#i", $value)) {
+            $fail(__('validationRules::messages.username', ['attribute' => $attribute]));
+        }
     }
 }

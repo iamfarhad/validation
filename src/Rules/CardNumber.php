@@ -2,35 +2,38 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-final class CardNumber implements Rule
+final class CardNumber implements ValidationRule
 {
-    private ?string $attribute = null;
-
-    public function passes($attribute, $value): bool
+    /**
+     * Run the validation rule.
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->attribute = $attribute;
+        if (! is_string($value) && ! is_numeric($value)) {
+            $fail(__('validationRules::messages.cardNumber', ['attribute' => $attribute]));
+            return;
+        }
+
+        $value = (string) $value;
 
         if (! preg_match('#^\d{16}$#', $value)) {
-            return false;
+            $fail(__('validationRules::messages.cardNumber', ['attribute' => $attribute]));
+            return;
         }
 
         $sum = 0;
         for ($position = 1; $position <= 16; ++$position) {
-            $temp = $value[$position - 1];
+            $temp = (int) $value[$position - 1];
             $temp = $position % 2 === 0 ? $temp : $temp * 2;
             $temp = $temp > 9 ? $temp - 9 : $temp;
             $sum += $temp;
         }
 
-        return $sum % 10 === 0;
-    }
-
-    public function message(): string
-    {
-        return __('validationRules::messages.cardNumber', [
-            'attribute' => $this->attribute,
-        ]);
+        if ($sum % 10 !== 0) {
+            $fail(__('validationRules::messages.cardNumber', ['attribute' => $attribute]));
+        }
     }
 }

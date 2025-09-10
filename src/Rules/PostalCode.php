@@ -2,23 +2,25 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-final class PostalCode implements Rule
+final class PostalCode implements ValidationRule
 {
-    private ?string $attribute = null;
-
-    public function passes($attribute, $value): bool
+    /**
+     * Run the validation rule.
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->attribute = $attribute;
+        if (! is_string($value) && ! is_numeric($value)) {
+            $fail(__('validationRules::messages.postalCode', ['attribute' => $attribute]));
+            return;
+        }
 
-        return preg_match("#^(\d{10})$#", $value);
-    }
+        $value = (string) $value;
 
-    public function message(): string
-    {
-        return __('validationRules::messages.postalCode', [
-            'attribute' => $this->attribute,
-        ]);
+        if (! preg_match("#^(\d{10})$#", $value)) {
+            $fail(__('validationRules::messages.postalCode', ['attribute' => $attribute]));
+        }
     }
 }

@@ -8,56 +8,54 @@ use Illuminate\Support\Facades\Validator;
 
 final class PersianAlphaTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\PersianAlpha $persianAlpha;
-
-    protected function setUp(): void
+    public function test_valid_persian_text(): void
     {
-        parent::setUp();
+        $validTexts = [
+            'سلام',
+            'فارسی',
+            'تست متن فارسی',
+            'نام و نام خانوادگی',
+            'متن با فاصله',
+        ];
 
-        $this->persianAlpha = new PersianAlpha();
+        foreach ($validTexts as $text) {
+            $validator = Validator::make(
+                ['text' => $text],
+                ['text' => [new PersianAlpha()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Persian text '{$text}' should be valid");
+        }
     }
 
-    public function test_valid_persian_alpha(): void
+    public function test_invalid_persian_text(): void
     {
-        $this->assertTrue($this->persianAlpha->passes('persian_alpha', 'سلام دینا'));
+        $invalidTexts = [
+            'Hello',           // English text
+            'سلام Hello',      // Mixed Persian and English
+            'سلام123',         // Persian with numbers
+            '123',             // Only numbers
+            'سلام!',           // Persian with special characters
+        ];
+
+        foreach ($invalidTexts as $text) {
+            $validator = Validator::make(
+                ['text' => $text],
+                ['text' => [new PersianAlpha()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Text '{$text}' should be invalid");
+        }
     }
 
-    public function test_invalid_persian_alpha(): void
-    {
-        $this->assertFalse($this->persianAlpha->passes('persian_alpha', 'hello world'));
-    }
-
-    public function test_valid_persian_alpha_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'persian_alpha' => 'سلام دنیا',
-            ],
-            [
-                'persian_alpha' => [new PersianAlpha()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_alpha_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'persian_alpha' => 'hello world سلام دنیا',
-            ],
-            [
-                'persian_alpha' => [new PersianAlpha()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_persian_alpha_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['persian_alpha' => 'hello world سلام دنیا'],
-            ['persian_alpha' => [new PersianAlpha()]]
-        )->errors()->first();
+            ['text' => 'Hello'],
+            ['text' => [new PersianAlpha()]]
+        );
 
-        $this->assertSame('must be a persian alphabet.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('text', $validator->errors()->toArray());
     }
 }

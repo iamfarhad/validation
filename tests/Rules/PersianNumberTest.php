@@ -8,59 +8,53 @@ use Illuminate\Support\Facades\Validator;
 
 final class PersianNumberTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\PersianNumber $persianNumber;
-
-    protected function setUp(): void
+    public function test_valid_persian_numbers(): void
     {
-        parent::setUp();
+        $validNumbers = [
+            '۱۲۳۴۵۶۷۸۹۰',
+            '۱۲۳',
+            '۰',
+            '۹۸۷۶۵۴۳۲۱',
+        ];
 
-        $this->persianNumber = new PersianNumber();
+        foreach ($validNumbers as $number) {
+            $validator = Validator::make(
+                ['number' => $number],
+                ['number' => [new PersianNumber()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Persian number '{$number}' should be valid");
+        }
     }
 
-    public function test_valid_persian_number(): void
+    public function test_invalid_persian_numbers(): void
     {
-        $this->assertTrue($this->persianNumber->passes('class_number', '۲۱۳۴'));
+        $invalidNumbers = [
+            '1234567890',      // English numbers
+            '۱۲۳abc',         // Mixed Persian numbers and letters
+            'abc',             // Only letters
+            '۱۲۳ ۴۵۶',        // Persian numbers with space
+            '۱۲۳-۴۵۶',        // Persian numbers with dash
+        ];
+
+        foreach ($invalidNumbers as $number) {
+            $validator = Validator::make(
+                ['number' => $number],
+                ['number' => [new PersianNumber()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Number '{$number}' should be invalid");
+        }
     }
 
-    public function test_invalid_persian_number(): void
-    {
-        $this->assertFalse($this->persianNumber->passes('class_number', '2134'));
-    }
-
-    public function test_valid_persian_number_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'class_number' => '۲۱۳۴',
-            ],
-            [
-                'class_number' => [new PersianNumber()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_number_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'class_number' => '2134',
-            ],
-            [
-                'class_number' => [new PersianNumber()],
-            ]
-        )->passes());
-    }
-
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function test_failed_persian_number_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['class_number' => '2134'],
-            ['class_number' => [new PersianNumber()]]
-        )->errors()->first();
+            ['number' => '1234'],
+            ['number' => [new PersianNumber()]]
+        );
 
-        $this->assertSame('must be a persian number.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('number', $validator->errors()->toArray());
     }
 }

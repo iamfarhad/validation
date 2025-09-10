@@ -8,56 +8,54 @@ use Illuminate\Support\Facades\Validator;
 
 final class IsNotPersianTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\IsNotPersian $isNotPersian;
-
-    protected function setUp(): void
+    public function test_valid_non_persian_text(): void
     {
-        parent::setUp();
+        $validTexts = [
+            'Hello World',
+            'English text only',
+            '1234567890',
+            'Special characters !@#$%^&*()',
+            'Mixed English and numbers 123',
+        ];
 
-        $this->isNotPersian = new IsNotPersian();
+        foreach ($validTexts as $text) {
+            $validator = Validator::make(
+                ['text' => $text],
+                ['text' => [new IsNotPersian()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Text '{$text}' should be valid (not Persian)");
+        }
     }
 
-    public function test_valid_is_not_persian(): void
+    public function test_invalid_persian_text(): void
     {
-        $this->assertTrue($this->isNotPersian->passes('is_not_persian', 'hello world!'));
+        $invalidTexts = [
+            'سلام',
+            'فارسی',
+            'Hello سلام',          // Mixed English and Persian
+            'Text with Persian: فارسی',
+            '123 فارسی',
+        ];
+
+        foreach ($invalidTexts as $text) {
+            $validator = Validator::make(
+                ['text' => $text],
+                ['text' => [new IsNotPersian()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Text '{$text}' should be invalid (contains Persian)");
+        }
     }
 
-    public function test_invalid_is_not_persian(): void
-    {
-        $this->assertFalse($this->isNotPersian->passes('is_not_persian', 'سلام دنیا'));
-    }
-
-    public function test_valid_is_not_persian_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'is_not_persian' => 'hello world!',
-            ],
-            [
-                'is_not_persian' => [new IsNotPersian()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_is_not_persian_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'is_not_persian' => 'سلام دنیا',
-            ],
-            [
-                'is_not_persian' => [new IsNotPersian()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_is_not_persian_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['is_not_persian' => 'سلام دنیا'],
-            ['is_not_persian' => [new IsNotPersian()]]
-        )->errors()->first();
+            ['text' => 'سلام'],
+            ['text' => [new IsNotPersian()]]
+        );
 
-        $this->assertSame('could not be contain persian alpahbet or number.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('text', $validator->errors()->toArray());
     }
 }

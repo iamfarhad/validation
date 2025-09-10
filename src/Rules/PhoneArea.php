@@ -2,23 +2,25 @@
 
 namespace Iamfarhad\Validation\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-final class PhoneArea implements Rule
+final class PhoneArea implements ValidationRule
 {
-    private ?string $attribute = null;
-
-    public function passes($attribute, $value): bool
+    /**
+     * Run the validation rule.
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->attribute = $attribute;
+        if (! is_string($value) && ! is_numeric($value)) {
+            $fail(__('validationRules::messages.phoneArea', ['attribute' => $attribute]));
+            return;
+        }
 
-        return preg_match('#^(0[1-9]{2})[2-9]\d{7}+$#', $value);
-    }
+        $value = (string) $value;
 
-    public function message(): string
-    {
-        return __('validationRules::messages.phoneArea', [
-            'attribute' => $this->attribute,
-        ]);
+        if (! preg_match('#^(0[1-9]{2})[2-9]\d{7}+$#', $value)) {
+            $fail(__('validationRules::messages.phoneArea', ['attribute' => $attribute]));
+        }
     }
 }

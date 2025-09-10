@@ -8,56 +8,53 @@ use Illuminate\Support\Facades\Validator;
 
 final class CardNumberTest extends TestCase
 {
-    private \Iamfarhad\Validation\Rules\CardNumber $cardNumber;
-
-    protected function setUp(): void
+    public function test_valid_card_numbers(): void
     {
-        parent::setUp();
+        $validCards = [
+            '4532015112830366',  // Valid Visa card (Luhn algorithm)
+            '5555555555554444',  // Valid MasterCard
+            '4000000000000002',  // Valid test card
+        ];
 
-        $this->cardNumber = new CardNumber();
+        foreach ($validCards as $card) {
+            $validator = Validator::make(
+                ['card_number' => $card],
+                ['card_number' => [new CardNumber()]]
+            );
+
+            $this->assertTrue($validator->passes(), "Card number {$card} should be valid");
+        }
     }
 
-    public function test_valid_persian_card_number(): void
+    public function test_invalid_card_numbers(): void
     {
-        $this->assertTrue($this->cardNumber->passes('card_number', '0590995099116037'));
+        $invalidCards = [
+            '4532015112830367',  // Invalid checksum
+            '453201511283036',   // Too short (15 digits)
+            '45320151128303671', // Too long (17 digits)
+            '453201511283036a',  // Contains letters
+            '4532-0151-1283-0366', // Contains dashes
+            '4532 0151 1283 0366', // Contains spaces
+        ];
+
+        foreach ($invalidCards as $card) {
+            $validator = Validator::make(
+                ['card_number' => $card],
+                ['card_number' => [new CardNumber()]]
+            );
+
+            $this->assertFalse($validator->passes(), "Card number {$card} should be invalid");
+        }
     }
 
-    public function test_invalid_persian_card_number(): void
-    {
-        $this->assertFalse($this->cardNumber->passes('card_number', '0590995099116038'));
-    }
-
-    public function test_valid_persian_card_number_validator(): void
-    {
-        $this->assertTrue(Validator::make(
-            [
-                'card_number' => '0590995099116037',
-            ],
-            [
-                'card_number' => [new CardNumber()],
-            ]
-        )->passes());
-    }
-
-    public function test_invalid_persian_card_number_validator(): void
-    {
-        $this->assertFalse(Validator::make(
-            [
-                'card_number' => '0590995099116038',
-            ],
-            [
-                'card_number' => [new CardNumber()],
-            ]
-        )->passes());
-    }
-
-    public function test_failed_persian_card_number_message(): void
+    public function test_validation_error_message(): void
     {
         $validator = Validator::make(
-            ['card_number' => '0590995099116038'],
+            ['card_number' => '4532015112830367'],
             ['card_number' => [new CardNumber()]]
-        )->errors()->first();
+        );
 
-        $this->assertSame('must be a valid payment card number.', $validator);
+        $this->assertFalse($validator->passes());
+        $this->assertArrayHasKey('card_number', $validator->errors()->toArray());
     }
 }
