@@ -19,7 +19,7 @@ final class CardNumberTest extends TestCase
         foreach ($validCards as $card) {
             $validator = Validator::make(
                 ['card_number' => $card],
-                ['card_number' => [new CardNumber]]
+                ['card_number' => [new CardNumber()]]
             );
 
             $this->assertTrue($validator->passes(), "Card number {$card} should be valid");
@@ -40,7 +40,7 @@ final class CardNumberTest extends TestCase
         foreach ($invalidCards as $card) {
             $validator = Validator::make(
                 ['card_number' => $card],
-                ['card_number' => [new CardNumber]]
+                ['card_number' => [new CardNumber()]]
             );
 
             $this->assertFalse($validator->passes(), "Card number {$card} should be invalid");
@@ -51,7 +51,7 @@ final class CardNumberTest extends TestCase
     {
         $validator = Validator::make(
             ['card_number' => '4532015112830367'],
-            ['card_number' => [new CardNumber]]
+            ['card_number' => [new CardNumber()]]
         );
 
         $this->assertFalse($validator->passes());

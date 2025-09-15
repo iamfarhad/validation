@@ -19,7 +19,7 @@ final class PostalCodeTest extends TestCase
         foreach ($validCodes as $code) {
             $validator = Validator::make(
                 ['postal_code' => $code],
-                ['postal_code' => [new PostalCode]]
+                ['postal_code' => [new PostalCode()]]
             );
 
             $this->assertTrue($validator->passes(), "Postal code {$code} should be valid");
@@ -39,7 +39,7 @@ final class PostalCodeTest extends TestCase
         foreach ($invalidCodes as $code) {
             $validator = Validator::make(
                 ['postal_code' => $code],
-                ['postal_code' => [new PostalCode]]
+                ['postal_code' => [new PostalCode()]]
             );
 
             $this->assertFalse($validator->passes(), "Postal code {$code} should be invalid");
@@ -50,7 +50,7 @@ final class PostalCodeTest extends TestCase
     {
         $validator = Validator::make(
             ['postal_code' => '123456789'],
-            ['postal_code' => [new PostalCode]]
+            ['postal_code' => [new PostalCode()]]
         );
 
         $this->assertFalse($validator->passes());

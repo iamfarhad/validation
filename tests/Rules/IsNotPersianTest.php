@@ -21,7 +21,7 @@ final class IsNotPersianTest extends TestCase
         foreach ($validTexts as $text) {
             $validator = Validator::make(
                 ['text' => $text],
-                ['text' => [new IsNotPersian]]
+                ['text' => [new IsNotPersian()]]
             );
 
             $this->assertTrue($validator->passes(), "Text '{$text}' should be valid (not Persian)");
@@ -41,7 +41,7 @@ final class IsNotPersianTest extends TestCase
         foreach ($invalidTexts as $text) {
             $validator = Validator::make(
                 ['text' => $text],
-                ['text' => [new IsNotPersian]]
+                ['text' => [new IsNotPersian()]]
             );
 
             $this->assertFalse($validator->passes(), "Text '{$text}' should be invalid (contains Persian)");
@@ -52,7 +52,7 @@ final class IsNotPersianTest extends TestCase
     {
         $validator = Validator::make(
             ['text' => 'سلام'],
-            ['text' => [new IsNotPersian]]
+            ['text' => [new IsNotPersian()]]
         );
 
         $this->assertFalse($validator->passes());

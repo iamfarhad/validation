@@ -20,7 +20,7 @@ final class Base64Test extends TestCase
         foreach ($validBase64 as $base64) {
             $validator = Validator::make(
                 ['data' => $base64],
-                ['data' => [new Base64]]
+                ['data' => [new Base64()]]
             );
 
             $this->assertTrue($validator->passes(), "Base64 string {$base64} should be valid");
@@ -40,7 +40,7 @@ final class Base64Test extends TestCase
         foreach ($invalidBase64 as $base64) {
             $validator = Validator::make(
                 ['data' => $base64],
-                ['data' => [new Base64]]
+                ['data' => [new Base64()]]
             );
 
             $this->assertFalse($validator->passes(), "String {$base64} should be invalid base64");
@@ -51,7 +51,7 @@ final class Base64Test extends TestCase
     {
         $validator = Validator::make(
             ['data' => 'Hello World'],
-            ['data' => [new Base64]]
+            ['data' => [new Base64()]]
         );
 
         $this->assertFalse($validator->passes());
