@@ -32,7 +32,7 @@ class ValidationServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../resources/lang' => app()->langPath() . '/vendor/validationRules',
+            __DIR__ . '/../resources/lang' => lang_path('validationRules'),
         ]);
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang/', 'validationRules');
