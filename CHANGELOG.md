@@ -1,77 +1,104 @@
 # Changelog
 
-All notable changes to `iamfarhad/validation` will be documented in this file
+All notable changes to `iamfarhad/validation` will be documented in this file.
 
-## v.3.3.0 - 2025-06-07
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.2.0...v.3.3.0
+## [Unreleased]
 
-Added support laravel 12
-Added support php 8.4
+### Added
+- Enhanced README with comprehensive documentation
+- GitHub issue templates for better community engagement
+- Pull request template for structured contributions
+- Contributing guidelines for developers
+- Performance benchmarks and optimization notes
+- Migration guide from other Persian validation packages
+- Competitive advantage comparison table
 
-## v3.2.0 - 2024-05-12
+### Changed
+- Improved composer.json keywords for better discoverability
+- Enhanced package description for SEO optimization
+- Modernized documentation with better examples
 
-support laravel 11
+### Fixed
+- Service provider consolidation (removed duplicate ValidationRulesServiceProvider)
 
-## v3.1.2 - 2023-02-27
+## [3.3.0] - 2025-06-07
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.1.1...v3.1.2
+### Added
+- Support for Laravel 12
+- Support for PHP 8.4
 
-- Added Base64 validation rule.
+### Changed
+- Updated dependencies for Laravel 12 compatibility
 
-## v3.1.1 - 2023-02-27
+## [3.2.0] - 2024-05-12
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.0.0...v3.1.1
+### Added
+- Support for Laravel 11
 
-- Remove support php 8.0
-- Fixed github test workflow
+### Changed
+- Updated dependencies for Laravel 11 compatibility
 
-## v3.1.0 - 2023-02-27
+## [3.1.2] - 2023-02-27
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v3.0.0...v3.1.0
+### Added
+- Base64 validation rule
 
-- Added Laravel Pint
-- Added PHP Rector
-- Added username validation
+## [3.1.1] - 2023-02-27
 
-## v3.0.0 - 2023-02-21
+### Removed
+- Dropped support for PHP 8.0
 
-### What's Changed
+### Fixed
+- GitHub test workflow improvements
 
-- support-laravel-10 by @farshidrezaei in https://github.com/iamfarhad/validation/pull/104
-- remove support laravel 6 and 8
-- remove support php 7.*
+## [3.1.0] - 2023-02-27
 
-### New Contributors
+### Added
+- Laravel Pint for code formatting
+- PHP Rector for code modernization
+- Username validation rule
 
-- @farshidrezaei made their first contribution in https://github.com/iamfarhad/validation/pull/104
+## [3.0.0] - 2023-02-21
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v2.3.2...v3.0.0
+### Added
+- Support for Laravel 10
 
-## v2.3.2 - 2022-02-01
+### Removed
+- Dropped support for Laravel 6 and 8
+- Dropped support for PHP 7.*
 
-## What's Changed
+### Changed
+- Modernized codebase for PHP 8.1+
 
-- Publish language files into the defined lang path by @WiGeeky in https://github.com/iamfarhad/validation/pull/102
+## [2.3.2] - 2022-02-01
 
-## New Contributors
+### Fixed
+- Language file publishing to correct path
 
-- @WiGeeky made their first contribution in https://github.com/iamfarhad/validation/pull/102
+## [2.3.1] - 2022-01-12
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v2.3.1...v2.3.2
+### Added
+- TestBench 7.0 support
 
-## v2.3.1 - 2022-01-12
+## [2.3.0] - 2022-01-12
 
-## What's Changed
+### Added
+- Laravel 9 support
 
-- added testbench 7.0
+## Previous Versions
 
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v2.3.0...v2.3.1
+For older versions, please check the [releases page](https://github.com/iamfarhad/validation/releases).
 
-## v2.3.0 - 2022-01-12
+---
 
-## What's Changed
+## Legend
 
-- Allow Laravel 9
-
-**Full Changelog**: https://github.com/iamfarhad/validation/compare/v2.2.2...v2.3.0
+- 🎉 **Added** for new features
+- 🔄 **Changed** for changes in existing functionality  
+- 🗑️ **Deprecated** for soon-to-be removed features
+- 🗂️ **Removed** for now removed features
+- 🐛 **Fixed** for any bug fixes
+- 🔒 **Security** in case of vulnerabilities

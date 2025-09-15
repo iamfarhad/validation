@@ -1,23 +1,45 @@
 {
     "name": "iamfarhad/validation",
-    "description": "Laravel persian validation package with comprehensive validation rules for Iranian-specific data",
+    "description": "🇮🇷 Complete Laravel Persian validation package - Iranian national ID, mobile numbers, Shamsi dates, IBAN/Sheba, postal codes & more. Modern Laravel 10-12 support with both ValidationRule objects & string-based rules.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "laravel",
+        "laravel-validation",
+        "persian-validation",
+        "farsi-validation",
+        "iranian-validation",
         "validation",
         "validator",
         "persian",
         "farsi",
         "iran",
-        "lumen",
-        "custom",
-        "rule",
+        "iranian",
+        "shamsi",
+        "jalali",
+        "shamsi-date",
+        "jalali-date",
+        "persian-date",
         "national-code",
-        "mobile",
+        "iranian-national-id",
+        "mobile-validation",
+        "iranian-mobile",
+        "persian-mobile",
         "sheba",
+        "iban",
+        "iranian-iban",
         "postal-code",
-        "card-number"
+        "iranian-postal",
+        "card-number",
+        "bank-card",
+        "company-id",
+        "persian-text",
+        "farsi-text",
+        "persian-alphabet",
+        "persian-numbers",
+        "lumen",
+        "php8",
+        "modern-laravel"
     ],
     "homepage": "https://github.com/iamfarhad/validation",
     "support": {
@@ -51,7 +73,7 @@
         "phpunit/phpunit": "^10.0|^11.0|^12.0",
         "orchestra/testbench": "^8.0|^9.0|^10.0",
         "mockery/mockery": "^1.0|^2.0",
-        "phpstan/phpstan": "^1.10 || ^2.0",
+        "phpstan/phpstan": "^1.10",
         "laravel/pint": "^1.0"
     },
     "scripts": {
@@ -68,7 +90,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Iamfarhad\\Validation\\ValidationRulesServiceProvider"
+                "Iamfarhad\\Validation\\ValidationServiceProvider"
             ]
         }
     },

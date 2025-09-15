@@ -2,7 +2,7 @@
 
 namespace Iamfarhad\Validation\Tests;
 
-use Iamfarhad\Validation\ValidationRulesServiceProvider;
+use Iamfarhad\Validation\ValidationServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
@@ -16,7 +16,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            ValidationRulesServiceProvider::class,
+            ValidationServiceProvider::class,
         ];
     }
 }

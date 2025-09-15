@@ -15,4 +15,11 @@ return [
     'postalCode' => 'must be a iran postal code.',
     'username' => 'invalid format.',
     'base64' => 'invalid base64 format.',
+    'persianAlphaNum' => 'must contain only persian alphabet and numbers.',
+    'persianAlphaEngNum' => 'must contain only persian alphabet and english numbers.',
+    'companyId' => 'must be a valid iranian company id.',
+    'url' => 'must be a valid URL.',
+    'domain' => 'must be a valid domain name.',
+    'shamsiDate' => 'must be a valid shamsi date.',
+    'shamsiDateBetween' => 'must be a valid shamsi date between :start_year and :end_year.',
 ];
