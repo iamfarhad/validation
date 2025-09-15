@@ -545,7 +545,7 @@ if ($validator->fails()) {
 Publish the language files to customize error messages:
 
 ```bash
-php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationRulesServiceProvider"
+php artisan vendor:publish --provider="Iamfarhad\Validation\ValidationServiceProvider"
 ```
 
 This will publish translation files to `lang/vendor/validationRules/` directory where you can customize the error messages for each validation rule.
